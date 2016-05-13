@@ -21,3 +21,16 @@ class PlayerTests(unittest.TestCase):
 
         ac = p.calculate_armor_class()
         self.assertEqual(12, ac)
+
+    def test_skill_roll_string_positive_mod(self):
+        p = Player()
+        p.define_stats(dexterity=2)
+        dex_srs = p.skill_roll_string('dex')
+        self.assertEqual('1d20+2', dex_srs)
+
+
+    def test_skill_roll_string_negative_mod(self):
+        p = Player()
+        p.define_stats()
+        dex_srs = p.skill_roll_string('dex')
+        self.assertEqual('1d20-2', dex_srs)

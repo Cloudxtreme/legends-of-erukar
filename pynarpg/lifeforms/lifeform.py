@@ -20,6 +20,12 @@ class Lifeform(RpgEntity):
             return self.armor.calculate_armor_class()
         return 8 + self.attributes['dex']
 
+    def skill_roll_string(self, skill_type):
+        skill_value = self.attributes[skill_type]
+        if(skill_value < 0):
+            return '1d20{0}'.format(skill_value)
+        return '1d20+{0}'.format(skill_value)
+
     def attack(self, target):
         '''Attack another lifeform'''
         # Send a message that the player cannot attack without a weapon

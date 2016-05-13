@@ -8,8 +8,8 @@ class RpgEntity:
         captured = re.search(RpgEntity.expression, to_evaluate)
         return [int(x) for x in captured.groups() if x is not None]
 
-    def roll(self):
-        regex = self.regex()
+    def roll(self, to_evaluate):
+        regex = self.regex(to_evaluate)
         num, die = regex[:2]
         if len(regex) == 3:
             modifier = regex[3]
