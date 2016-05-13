@@ -12,3 +12,8 @@ class Lifeform:
     def define_level(self, level):
         self.level = level
         self.health = sum([4+self.attributes['vit'] for x in range(0, level)])
+
+    def calculate_armor_class(self):
+        if self.armor is not None:
+            return self.armor.calculate_armor_class()
+        return 8 + self.attributes['dex']
