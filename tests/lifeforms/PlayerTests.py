@@ -1,5 +1,6 @@
 from pynarpg.lifeforms.player import Player
 from pynarpg.inventory.armor import Armor
+from pynarpg.inventory.weapon import Weapon
 import unittest
 
 class PlayerTests(unittest.TestCase):
@@ -28,9 +29,22 @@ class PlayerTests(unittest.TestCase):
         dex_srs = p.skill_roll_string('dex')
         self.assertEqual('1d20+2', dex_srs)
 
-
     def test_skill_roll_string_negative_mod(self):
         p = Player()
         p.define_stats()
         dex_srs = p.skill_roll_string('dex')
         self.assertEqual('1d20-2', dex_srs)
+
+    def test_attack(self):
+        p = Player()
+        p.define_stats(dexterity=0)
+
+        target = Player()
+        target.define_stats()
+
+        p.weapon = Weapon()
+        attack_roll, armor_class, damage = p.attack(target)
+
+        self.assertIn(attack_roll, range(1,21))
+        self.assertEqual(armor_class, 6)
+        self.assertIn(damage, range(1,7))

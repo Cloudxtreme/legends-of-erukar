@@ -11,8 +11,9 @@ class RpgEntity:
     def roll(self, to_evaluate):
         regex = self.regex(to_evaluate)
         num, die = regex[:2]
+        modifier = 0
         if len(regex) == 3:
-            modifier = regex[3]
+            modifier = regex[2]
         return sum([self.individual_roll(die) + modifier for x in range(0,num)])
 
     def individual_roll(self, die):

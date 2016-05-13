@@ -31,4 +31,8 @@ class Lifeform(RpgEntity):
         # Send a message that the player cannot attack without a weapon
         if self.weapon is None: return
 
-        self.weapon.roll()
+        attack_roll = self.roll(self.skill_roll_string('dex'))
+        armor_class = target.calculate_armor_class()
+        damage = self.weapon.roll()
+
+        return [attack_roll, armor_class, damage]

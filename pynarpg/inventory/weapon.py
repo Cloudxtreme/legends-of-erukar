@@ -5,5 +5,5 @@ class Weapon(Inventory):
         self.damage = '1d6'
         self.damage_modifier = 'str'
 
-    def regex(self):
-        return super().regex(self.damage)
+    def roll(self):
+        return super().roll(self.damage)
