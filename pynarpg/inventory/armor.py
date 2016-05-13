@@ -1,4 +1,6 @@
 from pynarpg.inventory.inventory import Inventory
 
 class Armor(Inventory):
-    pass
+    def __init__(self):
+        self.armor_class = 10
+        self.max_dex_mod = 2

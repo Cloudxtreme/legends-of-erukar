@@ -1,3 +1,3 @@
 class Inventory:
     def __init__(self):
-        pass
+        self.value = 0
