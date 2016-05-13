@@ -1,4 +1,6 @@
-class Lifeform:
+from pynarpg.model.RpgEntity import RpgEntity
+
+class Lifeform(RpgEntity):
     def __init__(self):
         self.attributes = {}
         self.armor = None
@@ -17,3 +19,10 @@ class Lifeform:
         if self.armor is not None:
             return self.armor.calculate_armor_class()
         return 8 + self.attributes['dex']
+
+    def attack(self, target):
+        '''Attack another lifeform'''
+        # Send a message that the player cannot attack without a weapon
+        if self.weapon is None: return
+
+        self.weapon.roll()
