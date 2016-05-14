@@ -2,4 +2,5 @@ from pynarpg.model.RpgEntity import RpgEntity
 
 class Inventory(RpgEntity):
     def __init__(self):
-        self.value = 0
+        self.price = 0
+        self.name = 'Generic Item'

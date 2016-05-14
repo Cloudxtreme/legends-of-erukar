@@ -8,4 +8,4 @@ class ArmorTests(unittest.TestCase):
         dex = 3
         ac = armor.calculate_armor_class(dex)
 
-        self.assertEqual(ac, 12)
+        self.assertEqual(ac, 14)

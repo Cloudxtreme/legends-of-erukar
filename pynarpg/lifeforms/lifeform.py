@@ -1,8 +1,11 @@
 from pynarpg.model.RpgEntity import RpgEntity
 
 class Lifeform(RpgEntity):
+    base_armor_class = 10
+    base_health = 4
+
     def __init__(self):
-        self.attributes = {}
+        self.attributes = {'str': -2, 'dex': -2, 'vit': -2}
         self.armor = None
         self.weapon = None
         self.level = 0
@@ -13,12 +16,13 @@ class Lifeform(RpgEntity):
 
     def define_level(self, level):
         self.level = level
-        self.health = sum([4+self.attributes['vit'] for x in range(0, level)])
+        self.health = sum([Lifeform.base_health + self.attributes['vit']\
+            for x in range(0, level)])
 
     def calculate_armor_class(self):
         if self.armor is not None:
-            return self.armor.calculate_armor_class()
-        return 8 + self.attributes['dex']
+            return self.armor.calculate_armor_class(self.attributes['dex'])
+        return Lifeform.base_armor_class + self.attributes['dex']
 
     def skill_roll_string(self, skill_type):
         skill_value = self.attributes[skill_type]
