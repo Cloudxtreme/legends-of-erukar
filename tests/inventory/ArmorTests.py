@@ -1,4 +1,4 @@
-from pynarpg.inventory.armor import Armor
+from pynarpg.inventory.Armor import Armor
 import unittest
 
 class ArmorTests(unittest.TestCase):
