@@ -1,4 +1,4 @@
-from pynarpg.inventory.weapon import Weapon
+from pynarpg.inventory.Weapon import Weapon
 import unittest
 
 class WeaponTests(unittest.TestCase):

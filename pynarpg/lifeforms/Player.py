@@ -1,4 +1,4 @@
-from pynarpg.lifeforms.lifeform import Lifeform
+from pynarpg.lifeforms.Lifeform import Lifeform
 
 class Player(Lifeform):
     def __init__(self):

@@ -1,4 +1,4 @@
-from pynarpg.inventory.inventory import Inventory
+from pynarpg.inventory.Inventory import Inventory
 
 class Armor(Inventory):
     def __init__(self):

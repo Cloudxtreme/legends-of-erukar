@@ -1,6 +1,6 @@
-from pynarpg.lifeforms.player import Player
+from pynarpg.lifeforms.Player import Player
 from pynarpg.inventory.Armor import Armor
-from pynarpg.inventory.weapon import Weapon
+from pynarpg.inventory.Weapon import Weapon
 import unittest
 
 class PlayerTests(unittest.TestCase):

@@ -1,4 +1,4 @@
-from pynarpg.lifeforms.lifeform import Lifeform
+from pynarpg.lifeforms.Lifeform import Lifeform
 import unittest
 
 class LifeformTests(unittest.TestCase):
