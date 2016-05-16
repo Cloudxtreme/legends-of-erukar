@@ -19,7 +19,7 @@ The player's health is dependent on his level and vitality using the equation.
 player.health = (4 + player.vitality) * player.level
 ```
 
-This is a roguelike. When the player dies, he is done for good.
+This is a roguelike. When the player dies, he is done for good. When the character receives a killing blow he entires the "dying" status and will become incapacitated. After three rounds in this state, the player will die outright. Other players will have the option to use a medical kit on him for revival. A single attack on a "dying" character is called a "coup de grace" and will instantaneously kill that character.
 
 ## Commands
 To execute a command, the user must send a whisper to the Autonomous Node hosting the RPG server.

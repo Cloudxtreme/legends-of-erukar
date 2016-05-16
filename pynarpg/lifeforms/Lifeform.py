@@ -6,6 +6,7 @@ class Lifeform(RpgEntity):
 
     def __init__(self):
         self.attributes = {'str': -2, 'dex': -2, 'vit': -2}
+        self.afflictions = []
         self.armor = None
         self.weapon = None
         self.level = 0
@@ -40,3 +41,13 @@ class Lifeform(RpgEntity):
         damage = self.weapon.roll()
 
         return [attack_roll, armor_class, damage]
+
+    def take_damage(self, damage):
+        if 'dying' in self.afflictions:
+            self.kill()
+        self.health = max(0, self.health - damage)
+        if self.health == 0:
+            self.afflictions.append('dying')
+
+    def kill(self):
+        self.afflictions = ['dead']
