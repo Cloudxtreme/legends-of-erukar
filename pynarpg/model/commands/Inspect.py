@@ -5,4 +5,4 @@ class Inspect(Command):
         super().__init__()
 
     def execute(self, contents):
-        print(contents)
+        return contents

@@ -17,12 +17,3 @@ class InterfaceTests(unittest.TestCase):
 
         self.assertEqual(method, 'inspect')
         self.assertEqual(contents, 'other')
-
-    def test_received_whisper(self):
-        i = Interface()
-        msg = {'message': 'inspect self', 'sender': {'uid': 'asdf'}}
-
-        result = i.received_whisper(msg)
-
-        self.assertIsNotNone(result)
-        self.assertEqual(result.sender_uid, 'asdf')

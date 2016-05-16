@@ -9,10 +9,20 @@ class Interface:
         self.factory = FactoryBase()
 
     def received_whisper(self, whisper_msg):
+        '''received_whisper hook for whenever the node gets a whisper message'''
+        # Process the message to get everything you need to generate
         uid = whisper_msg['sender']['uid']
         command, payload = self.command_and_payload(whisper_msg['message'])
         target_command = '{0}.{1}'.format(Interface.command_location, command.capitalize())
-        return self.factory.create_one(target_command, {'sender_uid': uid})
+        generation_parameters = { \
+            'sender_uid': uid, \
+            'data': self.data }
+
+        # Now actually make the thing with specified params
+        created = self.factory.create_one(target_command, generation_parameters)
+
+        # The Command tcan return something if it needs to for some reason
+        return created.execute(payload)
 
     def command_and_payload(self, message):
         '''
