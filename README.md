@@ -26,6 +26,8 @@ To execute a command, the user must send a whisper to the Autonomous Node hostin
 
 | Command | Description |
 | ------- | ----------- |
+| Join | Join the system; if the player has a character already, that character is resumed, otherwise the New Character wizard starts |
+| Quit | Leave the system. The character will remain in place for five rounds before it is removed. |
 | Inspect *object* | Inspect a specified person or object. |
 | Attack *object* | Attack a specified person or object. Cannot select self. |
 | Equip *item* | Equip a weapon or armor, if it's currently in your inventory |
