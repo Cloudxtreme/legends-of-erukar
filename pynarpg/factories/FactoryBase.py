@@ -1,5 +1,4 @@
 from pynarpg.model.RpgEntity import RpgEntity
-import random
 
 class FactoryBase(RpgEntity):
     def module_and_type(self, type_to_generate):
@@ -17,10 +16,18 @@ class FactoryBase(RpgEntity):
         '''Create a blank template'''
         try:
             module, type_to_generate = self.module_and_type(type_to_generate)
-        except Exception as msg:
-            print(msg)
-            return
+        except Exception as msg: return
         # Try to find a type to generate in the module
         if not hasattr(module, type_to_generate):
             return
         return getattr(module, type_to_generate)()
+
+    def create_one(self, type_to_generate, generation_parameters):
+        '''
+        Create an object template and then use a dictionary to assign values to
+        the new object.
+        '''
+        shell = self.create_template(type_to_generate)
+        for param in [x for x in generation_parameters if hasattr(shell, x)]:
+            setattr(shell, param, generation_parameters[param])
+        return shell
