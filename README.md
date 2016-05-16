@@ -40,3 +40,13 @@ To execute a command, the user must send a whisper to the Autonomous Node hostin
 | Close *object*/[NESW] | Close NESW door or an object, if it exists and is openable |
 | Use *item* on *object* | Use an item on an object |
 | Give *item* to *object* | Give an item to an object, such as a chest or another player |
+
+## Character Progression
+A player's level progression is directly tied to his net wealth. That is to say that the more items and money the player has the higher level he is. Item worth, however, is some scalar value less than the absolute value, as shown in the following equation.
+
+```python
+# Where SCALAR is some value from 0.5 to 0.9
+player.net_worth = player.money + SCALAR*sum(player.inventory.value)
+```
+
+This effectively creates a tradeoff between purchasing items and having levels, as you can decrease in levels due to buying items.
