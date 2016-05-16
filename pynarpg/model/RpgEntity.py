@@ -11,11 +11,8 @@ class RpgEntity:
     def roll(self, to_evaluate):
         '''Roll on a string such as '1d20' or '6d6+6' '''
         regex = self.regex(to_evaluate)
-        num, die = regex[:2]
-        modifier = 0
-        if len(regex) == 3:
-            modifier = regex[2]
-        return sum([self.individual_roll(die) + modifier for x in range(0,num)])
+        num, die, mod = [regex[i] if i < len(regex) else 0 for i in range(0,3)]
+        return sum([self.individual_roll(die) + mod for x in range(0,num)])
 
     def individual_roll(self, die):
         '''Perform a single roll of a die (uniform distribution)'''
