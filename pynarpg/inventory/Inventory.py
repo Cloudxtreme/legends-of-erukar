@@ -8,4 +8,4 @@ class Inventory(RpgEntity):
         self.suffix = ''
 
     def describe(self):
-        return '{0} {1}{2}'.format(self.rarity, self.item_type, self.suffix)
+        return '{0} {1} {2}'.format(self.rarity, self.item_type, self.suffix).strip()
