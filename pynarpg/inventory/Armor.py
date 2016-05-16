@@ -1,7 +1,8 @@
-from pynarpg.inventory.Inventory import Inventory
+from pynarpg.inventory.Item import Item
 
-class Armor(Inventory):
+class Armor(Item):
     def __init__(self):
+        super().__init__()
         self.armor_class_modifier = 2
         self.max_dex_mod = 2
 

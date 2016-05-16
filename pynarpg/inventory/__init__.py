@@ -1,5 +1,5 @@
-from pynarpg.inventory.Inventory import Inventory
+from pynarpg.inventory.Item import Item
 from pynarpg.inventory.Armor import Armor
 from pynarpg.inventory.Weapon import Weapon
 
-__all__ = ["Inventory", "Armor", "Weapon"]
+__all__ = ["Item", "Armor", "Weapon"]

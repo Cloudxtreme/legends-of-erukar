@@ -16,3 +16,7 @@ class RpgEntity:
     def individual_roll(self, die):
         '''Perform a single roll of a die (uniform distribution)'''
         return math.ceil(random.uniform(0, die))
+
+    def matches(self, other):
+        '''Do in subclass'''
+        return False
