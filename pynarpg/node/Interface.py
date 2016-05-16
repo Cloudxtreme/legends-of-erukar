@@ -2,7 +2,7 @@ from pynarpg.factories.FactoryBase import FactoryBase
 from pynarpg.node.DataAccess import DataAccess
 
 class Interface:
-    command_location = 'pynarpg.model.commands'
+    command_location = 'pynarpg.commands'
 
     def __init__(self):
         self.data = DataAccess()
