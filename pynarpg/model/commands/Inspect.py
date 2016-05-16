@@ -5,4 +5,6 @@ class Inspect(Command):
         super().__init__()
 
     def execute(self, contents):
-        return contents
+        if 'self' in contents:
+            return 'This is you'
+        return 'This is another person'
