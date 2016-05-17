@@ -22,7 +22,7 @@ class Open(DirectionalCommand):
         return self.handle_contents(room, player, payload)
 
     def handle_contents(self, room, player, item_name):
-        # Try to find the item in the room
+        '''Try to find the item in the room, then run on_open on it if so'''
         item = self.find_in_room(room, item_name)
         if item is not None:
             # We found it, so run on_open on it
