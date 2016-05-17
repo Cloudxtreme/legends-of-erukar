@@ -22,10 +22,11 @@ class TakeTests(unittest.TestCase):
         t = Take()
         t.sender_uid = p.uid
         t.data = data_store
-        t.execute(r, 'sword')
+        result = t.execute(r, 'sword')
 
         self.assertTrue(w in p.inventory)
         self.assertTrue(w not in r.contents)
+        self.assertEqual(result, Take.success.format('Generic Sword'))
 
     def test_take_execution_no_match(self):
         p = Player()
@@ -42,7 +43,8 @@ class TakeTests(unittest.TestCase):
         t = Take()
         t.sender_uid = p.uid
         t.data = data_store
-        t.execute(r, 'Sword')
+        result = t.execute(r, 'Sword')
 
         self.assertTrue(w in r.contents)
         self.assertTrue(w not in p.inventory)
+        self.assertEqual(result, Take.failure.format('Sword'))

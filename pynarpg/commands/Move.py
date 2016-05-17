@@ -1,8 +1,8 @@
-from pynarpg.model.Command import Command
+from pynarpg.model.DirectionalCommand import DirectionalCommand
 from pynarpg.environment.Door import Door
 from pynarpg.environment.Room import Room
 
-class Move(Command):
+class Move(DirectionalCommand):
     move_through_wall = 'You attempt to pass through a wall with no luck'
     move_through_closed_door = 'You cannot move this way because a door prevents you from doing so'
     move_successful = 'You have successfully moved'
@@ -25,16 +25,3 @@ class Move(Command):
         player.character.current_room = in_direction['room']
         room.on_inspect(player)
         return Move.move_successful
-
-
-    def determine_direction(self, payload):
-        '''Take text and determine its respective cardinal direction'''
-
-        couples = [
-            { "keywords": ['n', 'north'], "direction": Room.North },
-            { "keywords": ['e', 'east'], "direction": Room.East },
-            { "keywords": ['s', 'south'], "direction": Room.South },
-            { "keywords": ['w', 'west'], "direction": Room.West } ]
-
-        return next((x['direction'] for x in couples \
-            if any([k == payload for k in x['keywords']])), None)
