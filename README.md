@@ -1,4 +1,4 @@
-# pyna-rpg
+# pyna-rpg  [![Code Climate](https://codeclimate.com/github/etkirsch/pyna-rpg/badges/gpa.svg)](https://codeclimate.com/github/etkirsch/pyna-rpg) [![Build Status](https://travis-ci.org/etkirsch/pyna-rpg.svg?branch=master)](https://travis-ci.org/etkirsch/pyna-rpg)
 A silly mesh-chat/pyna-colada RPG node very loosely based on d20 RPG rulesets
 
 ## Mechanics
