@@ -11,4 +11,4 @@ class Item(RpgEntity):
         return '{0} {1} {2}'.format(self.rarity, self.item_type, self.suffix).strip()
 
     def matches(self, other):
-        return self.item_type == other
+        return self.item_type.lower() in other.lower()
