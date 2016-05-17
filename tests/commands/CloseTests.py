@@ -102,7 +102,7 @@ class CloseTests(unittest.TestCase):
 
         result = o.execute(n, 'south')
 
-        self.assertEqual(result, Close.nesw_success)
+        self.assertEqual(result, Close.nesw_close_success)
         self.assertEqual(d.status, Door.Closed)
 
     def test_execute_on_chest(self):

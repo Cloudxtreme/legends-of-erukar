@@ -2,7 +2,7 @@ from pynarpg.model.DirectionalCommand import DirectionalCommand
 from pynarpg.environment.Door import Door
 
 class Open(DirectionalCommand):
-    nesw_success = 'You have successfully opened the door'
+    nesw_open_success = 'You have successfully opened the door'
     nesw_locked = 'You try to open the door, but it is locked'
     nesw_already_open = 'The door is already open'
     nesw_no_door = 'There is no door in this direction to open'
@@ -58,4 +58,4 @@ class Open(DirectionalCommand):
 
         # Actually open the door
         door.status = Door.Open
-        return Open.nesw_success
+        return Open.nesw_open_success
