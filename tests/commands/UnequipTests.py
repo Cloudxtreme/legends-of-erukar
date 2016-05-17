@@ -26,7 +26,7 @@ class UnequipTests(unittest.TestCase):
 
         self.assertTrue(w in p.inventory)
         self.assertEqual(p.weapon, None)
-        self.assertEqual("Weapon has been unequipped", result)
+        self.assertEqual(Unequip.unequipped_weapon, result)
 
     def test_unequip_armor(self):
         p = Player()
@@ -47,7 +47,7 @@ class UnequipTests(unittest.TestCase):
 
         self.assertTrue(a in p.inventory)
         self.assertEqual(p.armor, None)
-        self.assertEqual("Armor has been unequipped", result)
+        self.assertEqual(Unequip.unequipped_armor, result)
 
     def test_unequip_item(self):
         p = Player()
@@ -66,4 +66,4 @@ class UnequipTests(unittest.TestCase):
         result = u.execute(None, 'potion')
 
         self.assertTrue(i in p.inventory)
-        self.assertEqual("No equipped item 'potion' was found", result)
+        self.assertEqual(Unequip.not_found.format('potion'), result)

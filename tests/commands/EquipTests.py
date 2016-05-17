@@ -25,7 +25,7 @@ class EquipTests(unittest.TestCase):
 
         self.assertTrue(w in p.inventory)
         self.assertEqual(p.weapon, w)
-        self.assertEqual("'Generic Sword' equipped as weapon successfully", result)
+        self.assertEqual(Equip.equipped_weapon.format('Generic Sword'), result)
 
     def test_equip_armor(self):
         p = Player()
@@ -45,7 +45,7 @@ class EquipTests(unittest.TestCase):
 
         self.assertTrue(a in p.inventory)
         self.assertEqual(p.armor, a)
-        self.assertEqual("'Generic Plate Mail' equipped as armor successfully", result)
+        self.assertEqual(Equip.equipped_armor.format('Generic Plate Mail'), result)
 
     def test_equip_item(self):
         p = Player()
@@ -66,7 +66,7 @@ class EquipTests(unittest.TestCase):
         self.assertTrue(i in p.inventory)
         self.assertNotEqual(p.armor, i)
         self.assertNotEqual(p.weapon, i)
-        self.assertEqual("'Generic Potion' was found but cannot be equipped", result)
+        self.assertEqual(Equip.cannot_equip.format('Generic Potion'), result)
 
     def test_equip_no_match(self):
         p = Player()
@@ -87,4 +87,4 @@ class EquipTests(unittest.TestCase):
         self.assertTrue(i in p.inventory)
         self.assertNotEqual(p.armor, i)
         self.assertNotEqual(p.weapon, i)
-        self.assertEqual("Unable to find 'sword' in inventory", result)
+        self.assertEqual(Equip.not_found.format('sword'), result)
