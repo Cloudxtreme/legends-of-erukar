@@ -8,10 +8,18 @@ class Room(EnvironmentPiece):
 
     def __init__(self):
         self.contents = []
-        self.connections = [{} for x in range(0,4)]
+        self.connections = [None for x in range(0, 4)]
 
-    def connect_room(self, other_room, direction):
-        pass
+    def connect_room(self, direction, other_room, door=None):
+        self.connections[direction] = { "room": other_room, "door": door}
 
     def invert_direction(self, direction):
         return (direction + 2) % 4
+
+    def get_in_direction(self, direction):
+        return self.connections[direction]
+
+    def coestablish_connection(self, direction, other_room, door=None):
+        '''Establishes a connection to both rooms'''
+        self.connect_room(direction, other_room, door)
+        other_room.connect_room(self.invert_direction(direction), self, door)

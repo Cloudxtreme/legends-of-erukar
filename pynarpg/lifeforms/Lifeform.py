@@ -11,6 +11,7 @@ class Lifeform(RpgEntity):
         self.weapon = None
         self.level = 0
         self.health = 0
+        self.current_room = None
 
     def define_stats(self, strength=-2, dexterity=-2, vitality=-2):
         self.attributes = { 'str': strength, 'dex': dexterity, 'vit': vitality }
