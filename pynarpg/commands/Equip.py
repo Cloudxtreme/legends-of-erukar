@@ -10,7 +10,7 @@ class Equip(Command):
     cannot_equip = "'{0}' was found but cannot be equipped"
     item_type_expression = "\.(\w+)'"
 
-    def execute(self, room, item_name):
+    def execute(self, item_name):
         player = self.find_player()
         if player is None: return
 

@@ -22,7 +22,7 @@ class UnequipTests(unittest.TestCase):
         u = Unequip()
         u.sender_uid = p.uid
         u.data = data_store
-        result = u.execute(None, 'sword')
+        result = u.execute('sword')
 
         self.assertTrue(w in p.inventory)
         self.assertEqual(p.weapon, None)
@@ -43,7 +43,7 @@ class UnequipTests(unittest.TestCase):
         u = Unequip()
         u.sender_uid = p.uid
         u.data = data_store
-        result = u.execute(None, 'plate mail')
+        result = u.execute('plate mail')
 
         self.assertTrue(a in p.inventory)
         self.assertEqual(p.armor, None)
@@ -63,7 +63,7 @@ class UnequipTests(unittest.TestCase):
         u = Unequip()
         u.sender_uid = p.uid
         u.data = data_store
-        result = u.execute(None, 'potion')
+        result = u.execute('potion')
 
         self.assertTrue(i in p.inventory)
         self.assertEqual(Unequip.not_found.format('potion'), result)

@@ -17,12 +17,13 @@ class TakeTests(unittest.TestCase):
         w = Weapon()
         w.item_type = 'Sword'
         r = Room()
+        p.current_room = r
         r.contents.append(w)
 
         t = Take()
         t.sender_uid = p.uid
         t.data = data_store
-        result = t.execute(r, 'sword')
+        result = t.execute('sword')
 
         self.assertTrue(w in p.inventory)
         self.assertTrue(w not in r.contents)
@@ -38,12 +39,13 @@ class TakeTests(unittest.TestCase):
         w = Weapon()
         w.item_type = 'Firearm'
         r = Room()
+        p.current_room = r
         r.contents.append(w)
 
         t = Take()
         t.sender_uid = p.uid
         t.data = data_store
-        result = t.execute(r, 'Sword')
+        result = t.execute('Sword')
 
         self.assertTrue(w in r.contents)
         self.assertTrue(w not in p.inventory)

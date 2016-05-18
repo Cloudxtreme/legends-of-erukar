@@ -9,6 +9,8 @@ class Room(EnvironmentPiece):
     def __init__(self):
         self.contents = []
         self.connections = [None for x in range(0, 4)]
+        self.nesw_descriptions = ['TBD' for x in range(0,4)]
+        self.description = ''
 
     def connect_room(self, direction, other_room, door=None):
         self.connections[direction] = { "room": other_room, "door": door}

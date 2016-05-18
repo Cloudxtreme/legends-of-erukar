@@ -3,15 +3,15 @@ from pynarpg.environment.Door import Door
 
 class Close(DirectionalCommand):
     nesw_close_success = 'You have successfully closed the door'
-    nesw_locked = 'You try to close the door, but it is locked'
     nesw_already_closed = 'The door is already closed'
     nesw_no_door = 'There is no door in this direction to close'
     nesw_wall = 'You cannot close a wall'
     not_found = 'There is nothing to close'
 
     # I'm not terribly happy with this, as it forces usage of only Doors.
-    def execute(self, room, payload):
+    def execute(self, payload):
         player = self.find_player()
+        room = player.character.current_room
         direction = self.determine_direction(payload.lower())
 
         # If the payload was NESW, treat this as a door
@@ -48,12 +48,8 @@ class Close(DirectionalCommand):
             # There is no door to close
             return Close.nesw_no_door
 
-        # Door is locked
-        if door.status is Door.Locked:
-            return Close.nesw_locked
-
         # Door is already close
-        if door.status is Door.Closed:
+        if door.status is not Door.Open:
             return Close.nesw_already_closed
 
         # Actually close the door

@@ -14,12 +14,13 @@ class CloseTests(unittest.TestCase):
         data_store.players.append(PlayerNode(p.uid, p))
 
         r = Room()
+        p.current_room = r
 
         o = Close()
         o.sender_uid = p.uid
         o.data = data_store
 
-        result = o.execute(r, 'north')
+        result = o.execute('north')
 
         self.assertEqual(result, Close.nesw_wall)
 
@@ -31,6 +32,7 @@ class CloseTests(unittest.TestCase):
         data_store.players.append(PlayerNode(p.uid, p))
 
         n = Room()
+        p.current_room = n
         s = Room()
         n.coestablish_connection(Room.South, s, None)
 
@@ -38,7 +40,7 @@ class CloseTests(unittest.TestCase):
         o.sender_uid = p.uid
         o.data = data_store
 
-        result = o.execute(n, 'south')
+        result = o.execute('south')
 
         self.assertEqual(result, Close.nesw_no_door)
 
@@ -52,6 +54,7 @@ class CloseTests(unittest.TestCase):
         n = Room()
         s = Room()
         d = Door()
+        p.current_room = n
         d.status = Door.Locked
         n.coestablish_connection(Room.South, s, d)
 
@@ -59,9 +62,9 @@ class CloseTests(unittest.TestCase):
         o.sender_uid = p.uid
         o.data = data_store
 
-        result = o.execute(n, 'south')
+        result = o.execute('south')
 
-        self.assertEqual(result, Close.nesw_locked)
+        self.assertEqual(result, Close.nesw_already_closed)
 
     def test_execute_through_closed_door(self):
         p = Player()
@@ -72,6 +75,7 @@ class CloseTests(unittest.TestCase):
 
         n = Room()
         s = Room()
+        p.current_room = n
         d = Door()
         n.coestablish_connection(Room.South, s, d)
 
@@ -79,7 +83,7 @@ class CloseTests(unittest.TestCase):
         o.sender_uid = p.uid
         o.data = data_store
 
-        result = o.execute(n, 'south')
+        result = o.execute('south')
         self.assertEqual(result, Close.nesw_already_closed)
 
 
@@ -93,6 +97,7 @@ class CloseTests(unittest.TestCase):
         n = Room()
         s = Room()
         d = Door()
+        p.current_room = n
         d.status = Door.Open
         n.coestablish_connection(Room.South, s, d)
 
@@ -100,7 +105,7 @@ class CloseTests(unittest.TestCase):
         o.sender_uid = p.uid
         o.data = data_store
 
-        result = o.execute(n, 'south')
+        result = o.execute('south')
 
         self.assertEqual(result, Close.nesw_close_success)
         self.assertEqual(d.status, Door.Closed)
@@ -113,6 +118,7 @@ class CloseTests(unittest.TestCase):
         data_store.players.append(PlayerNode(p.uid, p))
 
         n = Room()
+        p.current_room = n
         chest = Chest()
         n.contents.append(chest)
 
@@ -120,6 +126,6 @@ class CloseTests(unittest.TestCase):
         o.sender_uid = p.uid
         o.data = data_store
 
-        result = o.execute(n, 'chest')
+        result = o.execute('chest')
 
         self.assertEqual(result, 'Closed a chest')

@@ -10,4 +10,4 @@ class Door(EnvironmentPiece, Interactible):
         self.status = Door.Closed
 
     def on_inspect(self, *_):
-        return "This is a door"
+        return "There is a door"

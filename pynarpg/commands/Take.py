@@ -4,8 +4,9 @@ class Take(Command):
     failure = "No item '{0}' was found"
     success = "Successfully took {0}"
 
-    def execute(self, room, item_name):
+    def execute(self, item_name):
         player = self.find_player()
+        room = player.character.current_room
         if player is None: return
 
         # Try to find the item in the room

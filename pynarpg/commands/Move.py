@@ -7,10 +7,10 @@ class Move(DirectionalCommand):
     move_through_closed_door = 'You cannot move this way because a door prevents you from doing so'
     move_successful = 'You have successfully moved'
 
-    def execute(self, room, payload):
+    def execute(self, payload):
         player = self.find_player()
         direction = self.determine_direction(payload.lower())
-        in_direction = room.get_in_direction(direction)
+        in_direction = player.character.current_room.get_in_direction(direction)
 
         # No connections have been made in this direction
         if in_direction is None:
@@ -23,5 +23,5 @@ class Move(DirectionalCommand):
 
         # Move and autoinspect the room for the player
         player.character.current_room = in_direction['room']
-        room.on_inspect(player)
+        player.character.current_room.on_inspect(player)
         return Move.move_successful

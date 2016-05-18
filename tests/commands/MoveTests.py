@@ -14,12 +14,13 @@ class MoveTests(unittest.TestCase):
         data_store.players.append(PlayerNode(p.uid, p))
 
         r = Room()
+        p.current_room = r
 
         m = Move()
         m.sender_uid = p.uid
         m.data = data_store
 
-        result = m.execute(r, 'north')
+        result = m.execute('north')
 
         self.assertEqual(result, Move.move_through_wall)
 
@@ -31,6 +32,7 @@ class MoveTests(unittest.TestCase):
         data_store.players.append(PlayerNode(p.uid, p))
 
         n = Room()
+        p.current_room = n
         s = Room()
         d = Door()
         n.coestablish_connection(Room.South, s, d)
@@ -39,7 +41,7 @@ class MoveTests(unittest.TestCase):
         m.sender_uid = p.uid
         m.data = data_store
 
-        result = m.execute(n, 'south')
+        result = m.execute('south')
 
         self.assertEqual(result, Move.move_through_closed_door)
 
@@ -51,6 +53,7 @@ class MoveTests(unittest.TestCase):
         data_store.players.append(PlayerNode(p.uid, p))
 
         n = Room()
+        p.current_room = n
         s = Room()
         d = Door()
         d.status = Door.Open
@@ -60,7 +63,7 @@ class MoveTests(unittest.TestCase):
         m.sender_uid = p.uid
         m.data = data_store
 
-        result = m.execute(n, 'south')
+        result = m.execute('south')
 
         self.assertEqual(result, Move.move_successful)
         self.assertEqual(p.current_room, s)
