@@ -1,6 +1,7 @@
 from pynarpg.model.RpgEntity import RpgEntity
 
 class Lifeform(RpgEntity):
+    equipment_types = ['armor', 'weapon']
     base_armor_class = 10
     base_health = 4
 

@@ -1,3 +1,4 @@
+from pynarpg.lifeforms.Lifeform import Lifeform
 from pynarpg.model.Command import Command
 from pynarpg.inventory.Armor import Armor
 from pynarpg.inventory.Weapon import Weapon
@@ -11,12 +12,20 @@ class Unequip(Command):
         player = self.find_player()
         if player is None: return
 
-        if player.character.weapon is not None and player.character.weapon.matches(item_name):
-            player.character.weapon = None
-            return Unequip.unequipped_weapon
+        # Try to unequip a specific type of equipment
+        for equipment_type in Lifeform.equipment_types:
+            result = self.unequip_type(player.character, equipment_type, item_name)
+            if result is not None:
+                return result
 
-        if player.character.armor is not None and player.character.armor.matches(item_name):
-            player.character.armor = None
-            return Unequip.unequipped_armor
-
+        # Nothing was found
         return Unequip.not_found.format(item_name)
+
+    def unequip_type(self, character, equipment_type, item_name):
+        '''Dynamic method to unequip a weapon or armor'''
+        equipped = getattr(character, equipment_type)
+        if equipped is None: return
+
+        if equipped.matches(item_name):
+            setattr(character, equipment_type, None)
+            return getattr(Unequip, 'unequipped_{0}'.format(equipment_type))
