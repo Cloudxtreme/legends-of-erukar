@@ -10,6 +10,10 @@ class Inspect(DirectionalCommand):
         direction = self.determine_direction(payload.lower())
 
         if direction is None:
-            return room.description
+            if payload is '': return room.description
+            item = self.find_in_room(room, payload)
+            if item is None:
+                return room.description
+            return item.on_inspect()
 
         return room.nesw_descriptions[direction]

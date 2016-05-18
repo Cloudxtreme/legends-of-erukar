@@ -1,8 +1,5 @@
 from pynarpg.factories.FactoryBase import FactoryBase
 from pynarpg.node.DataAccess import DataAccess
-from pynarpg.environment import *
-from pynarpg.lifeforms.Player import Player
-from pynarpg.model.PlayerNode import PlayerNode
 
 class Interface:
     command_location = 'pynarpg.commands'
@@ -41,28 +38,3 @@ class Interface:
         '''
         out = message.split(' ', 1)
         return [out[i] if i < len(out) else '' for i in [0, 1]]
-
-    def run_command_line(self):
-        p = Player()
-        p.uid = 'Bob'
-
-        self.data.players.append(PlayerNode(p.uid, p))
-
-        n = Room()
-        n.description = 'This is the North Room'
-
-        c = Room()
-        c.description = 'This is the central area'
-
-        s = Room()
-        n.description = 'This is the South Room'
-
-        d = Door()
-        c.coestablish_connection(Room.North, n, None)
-        c.coestablish_connection(Room.South, s, d)
-        p.current_room = n
-
-        while True:
-            line = input('> ')
-            res = self.execute(p.uid, line)
-            print(res)

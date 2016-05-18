@@ -23,5 +23,4 @@ class Move(DirectionalCommand):
 
         # Move and autoinspect the room for the player
         player.character.current_room = in_direction['room']
-        player.character.current_room.on_inspect(player)
         return Move.move_successful

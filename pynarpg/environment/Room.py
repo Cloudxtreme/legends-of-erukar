@@ -15,6 +15,9 @@ class Room(EnvironmentPiece):
     def connect_room(self, direction, other_room, door=None):
         self.connections[direction] = { "room": other_room, "door": door}
 
+    def add(self, item):
+        self.contents.append(item)
+
     def invert_direction(self, direction):
         return (direction + 2) % 4
 

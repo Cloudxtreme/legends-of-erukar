@@ -1,8 +1,8 @@
 from pynarpg.model.RpgEntity import RpgEntity
 
 class Item(RpgEntity):
-    def __init__(self):
-        self.item_type = 'Item'
+    def __init__(self, item_type='Item'):
+        self.item_type = item_type
         self.price = 0
         self.rarity = 'Generic'
         self.suffix = ''
