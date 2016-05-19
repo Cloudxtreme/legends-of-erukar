@@ -14,6 +14,6 @@ class Inspect(DirectionalCommand):
             item = self.find_in_room(room, payload)
             if item is None:
                 return room.description
-            return item.on_inspect()
+            return item.on_inspect(player)
 
         return room.nesw_descriptions[direction]

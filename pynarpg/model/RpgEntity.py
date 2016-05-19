@@ -1,6 +1,7 @@
+from pynarpg.model.Interactible import Interactible
 import math, random, re
 
-class RpgEntity:
+class RpgEntity(Interactible):
     nDxy_expression = '(\d+)d(\d+)([+-]\d+)?'
 
     def regex(self, to_evaluate):

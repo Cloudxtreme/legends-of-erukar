@@ -1,7 +1,6 @@
 from pynarpg.model.EnvironmentPiece import EnvironmentPiece
-from pynarpg.model.Interactible import Interactible
 
-class Door(EnvironmentPiece, Interactible):
+class Door(EnvironmentPiece):
     Closed = 0
     Open = 1
     Locked = 2
