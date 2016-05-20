@@ -1,8 +1,4 @@
-from pynarpg.environment import *
-from pynarpg.lifeforms.Player import Player
-from pynarpg.model.PlayerNode import PlayerNode
-from pynarpg.node.Interface import *
-from pynarpg.inventory import *
+from pynarpg import *
 
 i = Interface()
 
@@ -28,8 +24,8 @@ s = Room()
 s.description = 'This is the South Room. There\'s nothing really interesting in this room.'
 
 d = Door()
-c.coestablish_connection(Room.North, n, None)
-c.coestablish_connection(Room.South, s, d)
+c.coestablish_connection(Direction.North, n, None)
+c.coestablish_connection(Direction.South, s, d)
 p.current_room = n
 
 while True:

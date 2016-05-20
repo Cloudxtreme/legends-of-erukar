@@ -1,5 +1,5 @@
 from pynarpg.lifeforms.Player import Player
-from pynarpg.model.PlayerNode import PlayerNode
+from pynarpg.model import PlayerNode, Direction
 from pynarpg.environment import *
 from pynarpg.commands.Close import Close
 from pynarpg.node.DataAccess import DataAccess
@@ -34,7 +34,7 @@ class CloseTests(unittest.TestCase):
         n = Room()
         p.current_room = n
         s = Room()
-        n.coestablish_connection(Room.South, s, None)
+        n.coestablish_connection(Direction.South, s, None)
 
         o = Close()
         o.sender_uid = p.uid
@@ -56,7 +56,7 @@ class CloseTests(unittest.TestCase):
         d = Door()
         p.current_room = n
         d.status = Door.Locked
-        n.coestablish_connection(Room.South, s, d)
+        n.coestablish_connection(Direction.South, s, d)
 
         o = Close()
         o.sender_uid = p.uid
@@ -77,7 +77,7 @@ class CloseTests(unittest.TestCase):
         s = Room()
         p.current_room = n
         d = Door()
-        n.coestablish_connection(Room.South, s, d)
+        n.coestablish_connection(Direction.South, s, d)
 
         o = Close()
         o.sender_uid = p.uid
@@ -99,7 +99,7 @@ class CloseTests(unittest.TestCase):
         d = Door()
         p.current_room = n
         d.status = Door.Open
-        n.coestablish_connection(Room.South, s, d)
+        n.coestablish_connection(Direction.South, s, d)
 
         o = Close()
         o.sender_uid = p.uid

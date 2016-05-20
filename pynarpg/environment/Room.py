@@ -1,15 +1,12 @@
 from pynarpg.model.EnvironmentPiece import EnvironmentPiece
+from pynarpg.model.Direction import Direction
 
 class Room(EnvironmentPiece):
-    North = 0
-    East = 1
-    South = 2
-    West = 3
 
     def __init__(self):
         self.contents = []
-        self.connections = [None for x in range(0, 4)]
-        self.nesw_descriptions = ['TBD' for x in range(0,4)]
+        self.connections = {direction: None for direction in Direction}
+        self.nesw_descriptions = {direction: 'TBD' for direction in Direction}
         self.description = ''
 
     def connect_room(self, direction, other_room, door=None):
@@ -19,7 +16,7 @@ class Room(EnvironmentPiece):
         self.contents.append(item)
 
     def invert_direction(self, direction):
-        return (direction + 2) % 4
+        return Direction( (direction.value + 2) % 4 )
 
     def get_in_direction(self, direction):
         return self.connections[direction]

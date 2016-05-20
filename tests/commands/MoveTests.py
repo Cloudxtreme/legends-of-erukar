@@ -3,6 +3,7 @@ from pynarpg.model.PlayerNode import PlayerNode
 from pynarpg.environment import *
 from pynarpg.commands.Move import Move
 from pynarpg.node.DataAccess import DataAccess
+from pynarpg.model.Direction import Direction
 import unittest
 
 class MoveTests(unittest.TestCase):
@@ -35,7 +36,7 @@ class MoveTests(unittest.TestCase):
         p.current_room = n
         s = Room()
         d = Door()
-        n.coestablish_connection(Room.South, s, d)
+        n.coestablish_connection(Direction.South, s, d)
 
         m = Move()
         m.sender_uid = p.uid
@@ -57,7 +58,7 @@ class MoveTests(unittest.TestCase):
         s = Room()
         d = Door()
         d.status = Door.Open
-        n.coestablish_connection(Room.South, s, d)
+        n.coestablish_connection(Direction.South, s, d)
 
         m = Move()
         m.sender_uid = p.uid
@@ -65,5 +66,5 @@ class MoveTests(unittest.TestCase):
 
         result = m.execute('south')
 
-        self.assertEqual(result, Move.move_successful)
+        self.assertTrue('You have successfully moved South.' in result)
         self.assertEqual(p.current_room, s)

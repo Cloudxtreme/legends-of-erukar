@@ -5,7 +5,7 @@ from pynarpg.environment.Room import Room
 class Move(DirectionalCommand):
     move_through_wall = 'You attempt to pass through a wall with no luck'
     move_through_closed_door = 'You cannot move this way because a door prevents you from doing so'
-    move_successful = 'You have successfully moved'
+    move_successful = 'You have successfully moved {0}.\n\n{1}'
 
     def execute(self, payload):
         player = self.find_player()
@@ -17,10 +17,10 @@ class Move(DirectionalCommand):
             return Move.move_through_wall
 
         # determine if the door prevents movement
-        door = in_direction["door"]
+        door = in_direction['door']
         if door is not None and door.status is not Door.Open:
             return Move.move_through_closed_door
 
         # Move and autoinspect the room for the player
         player.character.current_room = in_direction['room']
-        return Move.move_successful
+        return Move.move_successful.format(direction.name, in_direction['room'].description)
