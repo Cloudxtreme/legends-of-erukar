@@ -6,7 +6,7 @@ class Decoration(EnvironmentPiece):
         self.aliases = aliases
         self.inspect_results = results
 
-    def on_inspect(self):
+    def on_inspect(self, *_):
         return self.inspect_results
 
     def matches(self, query):

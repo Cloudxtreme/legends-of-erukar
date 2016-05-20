@@ -17,6 +17,7 @@ c.description = 'This is the central chamber. There is a small table set. There\
 c_deco = Decoration(['table set'], 'On the table is a potion filled with a red liquid. There\'s nothing more of note about it, however.')
 potion = Item('Potion')
 potion.rarity = 'Red'
+potion.description = 'This potion bottle, tiny as it is, is filled with some strange swirling red liquid. When held to the light it seems to glimmer.'
 c.add(c_deco)
 c.add(potion)
 
@@ -28,6 +29,8 @@ c.coestablish_connection(Direction.North, n, None)
 c.coestablish_connection(Direction.South, s, d)
 p.current_room = n
 
+# Inspect the room (this will occur on join)
+print(i.execute(p.uid, 'inspect'))
 while True:
     line = input('> ')
     res = i.execute(p.uid, line)
