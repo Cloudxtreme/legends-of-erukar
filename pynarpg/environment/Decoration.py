@@ -1,6 +1,6 @@
-from pynarpg.model.EnvironmentPiece import EnvironmentPiece
+from pynarpg.model.RpgEntity import RpgEntity
 
-class Decoration(EnvironmentPiece):
+class Decoration(RpgEntity):
     def __init__(self, aliases, results):
         super().__init__()
         self.aliases = aliases

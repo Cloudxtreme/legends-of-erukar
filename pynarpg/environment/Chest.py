@@ -1,6 +1,6 @@
-from pynarpg.model.EnvironmentPiece import EnvironmentPiece
+from pynarpg import RpgEntity
 
-class Chest(EnvironmentPiece):
+class Chest(RpgEntity):
     def on_open(self, sender):
         return "Opened a chest"
 

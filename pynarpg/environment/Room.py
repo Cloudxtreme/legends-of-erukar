@@ -1,7 +1,7 @@
-from pynarpg.model.EnvironmentPiece import EnvironmentPiece
+from pynarpg.model.RpgEntity import RpgEntity
 from pynarpg.model.Direction import Direction
 
-class Room(EnvironmentPiece):
+class Room(RpgEntity):
 
     def __init__(self):
         self.contents = []

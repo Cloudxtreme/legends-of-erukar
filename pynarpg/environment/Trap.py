@@ -1,4 +1,4 @@
-from pynarpg.model.EnvironmentPiece import EnvironmentPiece
+from pynarpg.model.RpgEntity import RpgEntity
 
-class Trap(EnvironmentPiece):
+class Trap(RpgEntity):
     pass

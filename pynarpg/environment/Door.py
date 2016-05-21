@@ -1,6 +1,6 @@
-from pynarpg.model.EnvironmentPiece import EnvironmentPiece
+from pynarpg.model.RpgEntity import RpgEntity
 
-class Door(EnvironmentPiece):
+class Door(RpgEntity):
     Closed = 0
     Open = 1
     Locked = 2

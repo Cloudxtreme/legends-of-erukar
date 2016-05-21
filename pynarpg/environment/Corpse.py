@@ -1,4 +1,4 @@
-from pynarpg.model.EnvironmentPiece import EnvironmentPiece
+from pynarpg.model.RpgEntity import RpgEntity
 
-class Corpse(EnvironmentPiece):
+class Corpse(RpgEntity):
     pass

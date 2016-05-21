@@ -3,6 +3,7 @@ from pynarpg.node.DataAccess import DataAccess
 
 class Interface:
     command_location = 'pynarpg.commands'
+    command_does_not_exist = 'The command \'{0}\' was not found.'
 
     def __init__(self):
         self.data = DataAccess()
@@ -25,6 +26,8 @@ class Interface:
 
         # Now actually make the thing with specified params
         created = self.factory.create_one(target_command, generation_parameters)
+        if created is None:
+            return Interface.command_does_not_exist.format(command)
 
         # The Command tcan return something if it needs to for some reason
         return created.execute(payload)
