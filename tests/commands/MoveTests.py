@@ -7,6 +7,22 @@ from pynarpg.model.Direction import Direction
 import unittest
 
 class MoveTests(unittest.TestCase):
+    def test_change_room(self):
+        p = Player()
+        p.uid = 'Bob'
+
+        old_room = Room()
+        p.current_room = old_room
+        new_room = Room()
+        new_room.description = 'new_room'
+
+        m = Move()
+        result = m.change_room(p, new_room, Direction.South)
+
+        self.assertEqual(result, Move.move_successful.format('South', 'new_room'))
+        self.assertTrue(p in new_room.contents)
+        self.assertTrue(p not in old_room.contents)
+
     def test_execute_through_wall(self):
         p = Player()
         p.uid = 'Bob'

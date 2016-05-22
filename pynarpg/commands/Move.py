@@ -22,5 +22,12 @@ class Move(DirectionalCommand):
             return Move.move_through_closed_door
 
         # Move and autoinspect the room for the player
-        player.character.current_room = in_direction['room']
-        return Move.move_successful.format(direction.name, in_direction['room'].description)
+        return self.change_room(player.character, in_direction['room'], direction)
+
+    def change_room(self, character, new_room, direction):
+        '''Used to transfer the character from one room to the next'''
+        if character in character.current_room.contents:
+            character.current_room.contents.remove(character)
+        new_room.contents.append(character)
+        character.current_room = new_room
+        return Move.move_successful.format(direction.name, new_room.description)
