@@ -88,3 +88,10 @@ class EquipTests(unittest.TestCase):
         self.assertNotEqual(p.armor, i)
         self.assertNotEqual(p.weapon, i)
         self.assertEqual(Equip.not_found.format('sword'), result)
+
+
+    def test_item_type(self):
+        w = Weapon()
+        e = Equip()
+        result = e.item_type(w)
+        self.assertEqual(result, 'weapon')

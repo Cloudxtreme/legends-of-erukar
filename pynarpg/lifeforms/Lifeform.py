@@ -78,5 +78,6 @@ class Lifeform(RpgEntity):
     def kill(self):
         self.afflictions = ['dead']
 
-    def on_take(self, *_):
-        pass
+    def link_to_room(self, room):
+        self.current_room = room
+        room.contents.append(self)

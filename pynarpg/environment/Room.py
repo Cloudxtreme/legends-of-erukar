@@ -25,3 +25,6 @@ class Room(RpgEntity):
         '''Establishes a connection to both rooms'''
         self.connect_room(direction, other_room, door)
         other_room.connect_room(self.invert_direction(direction), self, door)
+
+    def describe(self):
+        return self.description
