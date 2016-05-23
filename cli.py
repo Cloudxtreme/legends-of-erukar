@@ -16,7 +16,7 @@ n.add(w)
 n.add(n_deco)
 
 c = Room()
-c.description = 'This is the central chamber. There is a small table set. There\'s a small opening to the north where the claw marks originate and a door to the south.'
+c.description = 'This is the central chamber. There is a door to the south. On the eastern side of the room is a small table set. There\'s a small opening to the north where the claw marks originate.'
 c_deco = Decoration(['small table set'], 'On the table is a potion filled with a red liquid. There\'s nothing more of note about it, however.')
 potion = Item()
 potion.rarity, potion.item_type, potion.description = ['Red', 'Potion', 'This potion bottle, tiny as it is, is filled with some strange swirling red liquid. When held to the light it seems to glimmer.']
@@ -24,7 +24,11 @@ c.add(c_deco)
 c.add(potion)
 
 s = Room()
-s.description = 'This is the South Room. There\'s nothing really interesting in this room.'
+s.description = 'This is the South Room. There\'s nothing really interesting in this room. Other than that Gray Ooze of course...'
+l = Lifeform('Gray Ooze')
+l.define_level(1)
+l.current_room = s
+s.add(l)
 
 # Build connections between rooms
 d = Door()

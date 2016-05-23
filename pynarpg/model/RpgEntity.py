@@ -21,3 +21,7 @@ class RpgEntity(Interactible):
     def matches(self, other):
         '''Do in subclass'''
         return False
+
+    def get_name(self):
+        '''Do in subclass'''
+        return "n/a"
