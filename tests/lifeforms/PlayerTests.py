@@ -1,4 +1,4 @@
-from pynarpg.lifeforms.Player import Player
+from pynarpg.lifeforms import *
 from pynarpg.inventory.Armor import Armor
 from pynarpg.inventory.Weapon import Weapon
 import unittest
@@ -6,14 +6,14 @@ import unittest
 class PlayerTests(unittest.TestCase):
     def test_calculate_armor_class_no_armor(self):
         p = Player()
-        p.define_stats(dexterity=2)
+        p.define_stats({ Lifeform.armor_attribute: 2 })
         ac = p.calculate_armor_class()
 
         self.assertEqual(12, ac)
 
     def test_calculate_armor_class_with_armor(self):
         p = Player()
-        p.define_stats(dexterity=2)
+        p.define_stats({ Lifeform.armor_attribute: 2 })
 
         test_armor = Armor()
         test_armor.armor_class_mod = 2
@@ -25,22 +25,21 @@ class PlayerTests(unittest.TestCase):
 
     def test_skill_roll_string_positive_mod(self):
         p = Player()
-        p.define_stats(dexterity=2)
-        dex_srs = p.skill_roll_string('dex')
+        p.define_stats( { Lifeform.attack_roll_attribute: 2 } )
+        dex_srs = p.skill_roll_string(Lifeform.attack_roll_attribute)
         self.assertEqual('1d20+2', dex_srs)
 
     def test_skill_roll_string_negative_mod(self):
         p = Player()
-        p.define_stats()
-        dex_srs = p.skill_roll_string('dex')
+        dex_srs = p.skill_roll_string(Lifeform.attack_roll_attribute)
         self.assertEqual('1d20-2', dex_srs)
 
     def test_attack(self):
         p = Player()
-        p.define_stats(dexterity=0)
+        p.define_stats({ Lifeform.attack_damage_attribute: 0, Lifeform.attack_roll_attribute: 0 })
 
         target = Player()
-        target.define_stats(dexterity=0)
+        target.define_stats({ Lifeform.attack_roll_attribute: 0 })
 
         p.weapon = Weapon()
         attack_roll, armor_class, damage = p.attack(target)
