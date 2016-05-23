@@ -77,3 +77,6 @@ class Lifeform(RpgEntity):
 
     def kill(self):
         self.afflictions = ['dead']
+
+    def on_take(self, *_):
+        pass

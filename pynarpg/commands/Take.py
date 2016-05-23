@@ -1,4 +1,5 @@
 from pynarpg.model.Command import Command
+from pynarpg.inventory.Item import Item
 
 class Take(Command):
     failure = "No item '{0}' was found"
@@ -11,7 +12,7 @@ class Take(Command):
 
         # Try to find the item in the room
         item = self.find_in_room(room, item_name)
-        if item is not None:
+        if item is not None and issubclass(type(item), Item):
             # We found it, so give it to the player and return a success msg
             player.character.inventory.append(item)
             room.contents.remove(item)

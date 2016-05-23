@@ -25,3 +25,12 @@ class Interactible:
 
     def on_give(self, sender):
         pass
+
+    def matches(self, other):
+        return False
+
+    def get_name(self):
+        pass
+
+    def describe(self):
+        pass
