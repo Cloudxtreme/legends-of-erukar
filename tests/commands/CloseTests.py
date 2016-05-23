@@ -119,7 +119,7 @@ class CloseTests(unittest.TestCase):
 
         n = Room()
         p.current_room = n
-        chest = Chest()
+        chest = Container()
         n.contents.append(chest)
 
         o = Close()

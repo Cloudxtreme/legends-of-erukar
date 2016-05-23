@@ -45,16 +45,6 @@ class Lifeform(RpgEntity):
             return '1d20{0}'.format(skill_value)
         return '1d20+{0}'.format(skill_value)
 
-    def get(self, attribute):
-        '''Alias for getattr(self, ____)'''
-        return getattr(self, attribute)
-
-    def matches(self, payload):
-        return payload.lower() in self.name.lower()
-
-    def get_name(self):
-        return self.name
-
     def attack(self, target):
         '''Attack another lifeform'''
         # Send a message that the player cannot attack without a weapon
@@ -81,3 +71,13 @@ class Lifeform(RpgEntity):
     def link_to_room(self, room):
         self.current_room = room
         room.contents.append(self)
+
+    def get(self, attribute):
+        '''Alias for getattr(self, ____)'''
+        return getattr(self, attribute)
+
+    def matches(self, payload):
+        return payload.lower() in self.name.lower()
+
+    def get_name(self):
+        return self.name

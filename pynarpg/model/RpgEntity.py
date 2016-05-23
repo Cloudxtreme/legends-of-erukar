@@ -16,4 +16,4 @@ class RpgEntity(Interactible):
 
     def individual_roll(self, die):
         '''Perform a single roll of a die (uniform distribution)'''
-        return math.ceil(random.uniform(0, die))
+        return math.ceil(random.random()*die)

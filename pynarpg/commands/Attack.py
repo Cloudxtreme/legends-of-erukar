@@ -16,6 +16,7 @@ class Attack(Command):
         return self.adjudicate_attack(player.character, target)
 
     def adjudicate_attack(self, character, target):
+        '''Used to actually resolve an attack roll made between a character and target'''
         target_name = target.get_name()
         attack_roll, armor_class, damage = character.attack(target)
         if attack_roll <= armor_class:
@@ -24,17 +25,18 @@ class Attack(Command):
         attack_string = Attack.successful.format(attack_roll, target_name, damage)
         target.take_damage(damage)
 
-        if 'dying' in target.afflictions:
-            return Attack.caused_dying.format(attack_string, target_name)
+        if hasattr(target, 'afflictions'):
+            if 'dying' in target.afflictions:
+                return Attack.caused_dying.format(attack_string, target_name)
 
-        if 'dead' in target.afflictions:
-            self.create_corpse(target)
-            return Attack.caused_death.format(attack_string, target_name)
+            if 'dead' in target.afflictions:
+                self.create_corpse(target)
+                return Attack.caused_death.format(attack_string, target_name)
 
         return attack_string
 
     def create_corpse(self, target):
         '''Replaces a lifeform with a corpse'''
         room = target.current_room
-        room.contents.remove(target)
-        room.contents.append(Corpse())
+        room.remove(target)
+        room.add(Corpse(),'a','on the floor')

@@ -14,7 +14,10 @@ class Item(RpgEntity):
         return '{0} {1} {2}'.format(self.rarity, self.item_type, self.suffix).strip()
 
     def matches(self, other):
-        return self.item_type.lower() in other.lower()
+        return self.get_name().lower() in other.lower()
 
     def on_inspect(self, sender):
         return self.description.format(*(self.item_type, self.suffix, self.rarity))
+
+    def get_name(self):
+        return self.item_type

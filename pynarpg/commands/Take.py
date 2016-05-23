@@ -12,11 +12,11 @@ class Take(Command):
 
         # Try to find the item in the room
         item = self.find_in_room(room, item_name)
-        if item is not None and issubclass(type(item), Item):
+        if item is not None and issubclass(type(item.entity), Item):
             # We found it, so give it to the player and return a success msg
-            player.character.inventory.append(item)
+            player.character.inventory.append(item.entity)
             room.contents.remove(item)
-            return Take.success.format(item.describe())
+            return Take.success.format(item.entity.describe())
 
         # Send a failure message
         return Take.failure.format(item_name)

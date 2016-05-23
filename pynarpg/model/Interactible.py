@@ -34,3 +34,6 @@ class Interactible:
 
     def describe(self):
         pass
+
+    def take_damage(self, damage):
+        pass

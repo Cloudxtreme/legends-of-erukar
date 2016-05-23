@@ -18,7 +18,7 @@ class TakeTests(unittest.TestCase):
         w.item_type = 'Sword'
         r = Room()
         p.current_room = r
-        r.contents.append(w)
+        r.add(w,'a','on the floor')
 
         t = Take()
         t.sender_uid = p.uid

@@ -1,6 +1,6 @@
 from pynarpg import RpgEntity
 
-class Chest(RpgEntity):
+class Container(RpgEntity):
     def on_open(self, sender):
         return "Opened a chest"
 

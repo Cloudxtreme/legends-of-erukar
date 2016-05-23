@@ -10,7 +10,7 @@ class AttackTests(unittest.TestCase):
         data_store.players.append(PlayerNode(p.uid, p))
 
         r = Room()
-        p.current_room = r
+        p.link_to_room(r)
 
         a = Attack()
         a.sender_uid = p.uid

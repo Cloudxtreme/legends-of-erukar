@@ -10,6 +10,7 @@ class Move(DirectionalCommand):
     def execute(self, payload):
         player = self.find_player()
         direction = self.determine_direction(payload.lower())
+        if direction is None: return ''
         in_direction = player.character.current_room.get_in_direction(direction)
 
         # No connections have been made in this direction
@@ -30,4 +31,4 @@ class Move(DirectionalCommand):
             character.current_room.contents.remove(character)
         new_room.contents.append(character)
         character.current_room = new_room
-        return Move.move_successful.format(direction.name, new_room.description)
+        return Move.move_successful.format(direction.name, new_room.describe())
