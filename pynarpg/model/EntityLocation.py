@@ -39,3 +39,9 @@ class EntityLocation(RpgEntity):
             return getattr(self.entity, 'calculate_armor_class')()
 
         return 5
+
+    def on_open(self, sender):
+        return self.entity.on_open(sender)
+
+    def on_close(self, sender):
+        return self.entity.on_close(sender)

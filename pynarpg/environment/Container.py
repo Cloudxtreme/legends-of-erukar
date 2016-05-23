@@ -1,11 +1,21 @@
-from pynarpg import RpgEntity
+from pynarpg.model.Containable import Containable
+from pynarpg.environment.EnvironmentPiece import EnvironmentPiece
 
-class Container(RpgEntity):
+class Container(Containable, EnvironmentPiece):
+    def __init__(self, aliases, description, results):
+        Containable.__init__(self)
+        self.aliases = aliases
+        self.description = description
+        self.results = results
+
     def on_open(self, sender):
         return "Opened a chest"
 
     def on_close(self, sender):
         return "Closed a chest"
 
-    def matches(self, other):
-        return other.lower() == 'chest'
+    def describe(self):
+        return EnvironmentPiece.describe(self)
+
+    def on_inspect(self, *_):
+        return Containable.describe(self)

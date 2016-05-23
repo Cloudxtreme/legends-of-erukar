@@ -17,11 +17,11 @@ n.add(n_deco, 'some', 'in the floor', plural=True)
 
 c = Room()
 c.description = 'This is the central chamber. There is a door to the south. There\'s a small opening to the north where the claw marks originate.'
-c_deco = Decoration(['small table set'], 'On the eastern side of the room is a small table set.', 'On the table is a potion filled with a red liquid. There\'s nothing more of note about it, however.')
+c_deco = Container(['small table set'], 'On the eastern side of the room is a small table set.', 'On the table is a potion filled with a red liquid. There\'s nothing more of note about it, however.')
 potion = Item()
 potion.rarity, potion.item_type, potion.description = ['Red', 'Potion', 'This potion bottle, tiny as it is, is filled with some strange swirling red liquid. When held to the light it seems to glimmer.']
 c.add(c_deco, 'a', 'along the eastern wall')
-c.add(potion, 'a', 'inside')
+c_deco.add(potion, 'a', 'inside')
 
 s = Room()
 s.description = 'This is the South Room. There\'s nothing really interesting in this room. Other than that Gray Ooze of course...'

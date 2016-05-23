@@ -119,8 +119,8 @@ class CloseTests(unittest.TestCase):
 
         n = Room()
         p.current_room = n
-        chest = Container()
-        n.contents.append(chest)
+        chest = Container(['chest'],'','')
+        n.add(chest, 'a', 'on')
 
         o = Close()
         o.sender_uid = p.uid
