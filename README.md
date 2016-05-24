@@ -24,22 +24,22 @@ This is a roguelike. When the player dies, he is done for good. When the charact
 ## Commands
 To execute a command, the user must send a whisper to the Autonomous Node hosting the RPG server.
 
-| Command | Description |
-| ------- | ----------- |
-| Join | Join the system; if the player has a character already, that character is resumed, otherwise the New Character wizard starts |
-| Quit | Leave the system. The character will remain in place for five rounds before it is removed. |
-| Inspect *object* | Inspect a specified person or object. |
-| Attack *object* | Attack a specified person or object. Cannot select self. |
-| Equip *item* | Equip a weapon or armor, if it's currently in your inventory |
-| Unequip *item* | Unequip a weapon or armor if it's currently equipped |
-| Move [NESW] | Move North, East, South, or West in the current room if there's another room in that direction |
-| Inventory | View your inventory |
-| Stats | View your stats |
-| Take *item* | Take an item from the environment, if it exists |
-| Open *object*/[NESW] | Open NESW door or an object, if it exists and is openable |
-| Close *object*/[NESW] | Close NESW door or an object, if it exists and is openable |
-| Use *item* on *object* | Use an item on an object |
-| Give *item* to *object* | Give an item to an object, such as a chest or another player |
+| Command | Implemented? | Description |
+| ------- | --------- |  ----------- |
+| Inspect *object* | **Yes** | Inspect a specified person or object. |
+| Attack *object* | **Yes** | Attack a specified person or object. Cannot select self. |
+| Equip *item* | **Yes** | Equip a weapon or armor, if it's currently in your inventory |
+| Unequip *item* | **Yes** | Unequip a weapon or armor if it's currently equipped |
+| Move [NESW] | **Yes** | Move North, East, South, or West in the current room if there's another room in that direction |
+| Inventory | **Yes** | View your inventory |
+| Stats | **Yes** | View your stats |
+| Take *item* | **Yes** |Take an item from the environment, if it exists |
+| Open *object*/[NESW] | **Yes** | Open NESW door or an object, if it exists and is openable |
+| Close *object*/[NESW] | **Yes** | Close NESW door or an object, if it exists and is openable |
+| Join | No | Join the system; if the player has a character already, that character is resumed, otherwise the New Character wizard starts |
+| Quit | No | Leave the system. The character will remain in place for five rounds before it is removed. |
+| Use *item* on *object* | No | Use an item on an object |
+| Give *item* to *object* | No | Give an item to an object, such as a chest or another player |
 
 ## Character Progression
 A player's level progression is directly tied to his net wealth. That is to say that the more items and money the player has the higher level he is. Item worth, however, is some scalar value less than the absolute value, as shown in the following equation.

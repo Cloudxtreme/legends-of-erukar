@@ -3,6 +3,7 @@ import math, random, re
 
 class RpgEntity(Interactible):
     nDxy_expression = '(\d+)d(\d+)([+-]\d+)?'
+    base_armor_class = 10
 
     def regex(self, to_evaluate):
         '''Regex on the damage string'''
@@ -17,3 +18,6 @@ class RpgEntity(Interactible):
     def individual_roll(self, die):
         '''Perform a single roll of a die (uniform distribution)'''
         return math.ceil(random.random()*die)
+
+    def calculate_armor_class(self):
+        return RpgEntity.base_armor_class

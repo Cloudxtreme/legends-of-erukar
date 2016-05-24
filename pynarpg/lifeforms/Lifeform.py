@@ -8,7 +8,6 @@ class Lifeform(RpgEntity):
     armor_attribute = "dexterity"
     health_attribute = "vitality"
     equipment_types = ["armor", "weapon"]
-    base_armor_class = 10
     base_health = 4
 
     def __init__(self, name=""):
@@ -32,7 +31,7 @@ class Lifeform(RpgEntity):
 
     def calculate_armor_class(self):
         if 'dying' in self.afflictions:
-            return Lifeform.base_armor_class
+            return RpgEntity.base_armor_class
 
         ac_mod = self.get(Lifeform.armor_attribute)
         if self.armor is not None:
