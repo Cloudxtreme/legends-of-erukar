@@ -1,3 +1,4 @@
+from pynarpg.commands.Inspect import Inspect
 from pynarpg.model.DirectionalCommand import DirectionalCommand
 from pynarpg.environment.Door import Door
 from pynarpg.environment.Room import Room
@@ -23,12 +24,19 @@ class Move(DirectionalCommand):
             return Move.move_through_closed_door
 
         # Move and autoinspect the room for the player
-        return self.change_room(player.character, in_direction['room'], direction)
+        return self.change_room(player, in_direction['room'], direction)
 
-    def change_room(self, character, new_room, direction):
+    def change_room(self, player, new_room, direction):
         '''Used to transfer the character from one room to the next'''
+        character = player.character
         if character in character.current_room.contents:
             character.current_room.contents.remove(character)
         new_room.contents.append(character)
         character.current_room = new_room
-        return Move.move_successful.format(direction.name, new_room.describe())
+
+        i = Inspect()
+        i.data = self.data
+        i.sender_uid = self.sender_uid
+        inspection_result = i.execute('')
+
+        return Move.move_successful.format(direction.name, inspection_result)

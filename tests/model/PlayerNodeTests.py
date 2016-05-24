@@ -62,3 +62,20 @@ class PlayerNodeTests(unittest.TestCase):
         result = p.index(i)
 
         self.assertEqual(result, [])
+
+    def test_reverse_index(self):
+        p = PlayerNode('', None)
+        r = Room()
+        c = Container([],'','')
+        r.add(c,'','')
+        i = Item()
+        c.add(i,'','')
+
+        p.index_item(c, r)
+        p.index_item(i, c)
+
+        c_result = p.reverse_index(c)
+        r_result = p.reverse_index(r)
+
+        self.assertEqual(c_result, [i])
+        self.assertEqual(set(r_result), {c, i})

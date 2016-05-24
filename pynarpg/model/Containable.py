@@ -14,4 +14,4 @@ class Containable(RpgEntity):
 
     def remove(self, entity):
         target = next((x for x in self.contents if x is entity or (hasattr(x, 'entity') and x.entity is entity)), None)
-        self.contents.remove(entity)
+        self.contents.remove(target)

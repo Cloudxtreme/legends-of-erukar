@@ -11,11 +11,11 @@ class Command:
         '''Attempt to find a player in the data access component'''
         return self.data.find_player(self.sender_uid)
 
-    def find_in_room(self, room, item_name):
+    def find_in_room(self, container, item_name):
         '''Attempt to find an item in a room's contents'''
-        results = [p for p in room.contents if p.matches(item_name)]
-        if len(results) > 0:
-            return results[0]
+        player = self.find_player()
+        contents = set(container.contents + player.reverse_index(container))
+        return next((p for p in contents if p.matches(item_name)), None)
 
     def find_in_inventory(self, player, item_name):
         '''Attempt to find an item in a player's inventory'''

@@ -1,3 +1,5 @@
+from pynarpg.model.EntityLocation import EntityLocation
+
 class PlayerNode:
     def __init__(self, uid, character):
         self.uid = uid
@@ -6,6 +8,8 @@ class PlayerNode:
 
     def index_item(self, item, container):
         '''Used to store to traverse paths through a container tree to find an object'''
+        if type(item) is EntityLocation:
+            item = item.entity
         if container not in self.item_indexer:
             self.item_indexer[container] = []
         self.item_indexer[item] = self.item_indexer[container] + [container]
@@ -15,3 +19,7 @@ class PlayerNode:
         if item in self.item_indexer:
             return self.item_indexer[item]
         return []
+
+    def reverse_index(self, container):
+        '''Get all contents of a container'''
+        return [item for item in self.item_indexer if container in self.item_indexer[item]]
