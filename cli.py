@@ -17,14 +17,17 @@ n.add(n_deco, 'some', 'in the floor', plural=True)
 
 c = Room()
 c.description = 'This is the central chamber. There is a door to the south. There\'s a small opening to the north where the claw marks originate.'
-c_deco = Container(['small table set'], 'On the eastern side of the room is a small table set.', 'On the table is a potion filled with a red liquid. There\'s nothing more of note about it, however.')
+c_table = Container(['small table set'], 'On the eastern side of the room is a small table set.', 'This table is made with sealed mahogony.')
+c.add(c_table, 'a', 'along the eastern wall')
+c_drawer = Container(['drawer'], '', 'The drawer appears to be unlocked')
+c_table.add(c_drawer, 'a', 'underneath the table')
 potion = Item()
 potion.rarity, potion.item_type, potion.description = ['Red', 'Potion', 'This potion bottle, tiny as it is, is filled with some strange swirling red liquid. When held to the light it seems to glimmer.']
-c.add(c_deco, 'a', 'along the eastern wall')
-c_deco.add(potion, 'a', 'inside')
+c_drawer.add(potion, 'a', 'inside')
 
 s = Room()
-s.description = 'This is the South Room. There\'s nothing really interesting in this room. Other than that Gray Ooze of course...'
+s.description = 'This is the South Room.'
+s_deco = Decoration(['carvings', 'etchings'], 'There are ', 'on the walls')
 l = Lifeform('Gray Ooze')
 l.define_level(1)
 l.current_room = s
