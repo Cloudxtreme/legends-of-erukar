@@ -23,3 +23,7 @@ class PlayerNode:
     def reverse_index(self, container):
         '''Get all contents of a container'''
         return [item for item in self.item_indexer if container in self.item_indexer[item]]
+
+    def remove_index(self, item):
+        if item in self.item_indexer:
+            self.item_indexer.pop(item, None)

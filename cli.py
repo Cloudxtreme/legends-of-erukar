@@ -46,3 +46,4 @@ while True:
     res = i.execute(p.uid, line)
     if res is not None:
         print(res)
+        print('')
