@@ -1,5 +1,7 @@
-# pyna-rpg  [![Code Climate](https://codeclimate.com/github/etkirsch/pyna-rpg/badges/gpa.svg)](https://codeclimate.com/github/etkirsch/pyna-rpg) [![Test Coverage](https://codeclimate.com/github/etkirsch/pyna-rpg/badges/coverage.svg)](https://codeclimate.com/github/etkirsch/pyna-rpg/coverage) [![Issue Count](https://codeclimate.com/github/etkirsch/pyna-rpg/badges/issue_count.svg)](https://codeclimate.com/github/etkirsch/pyna-rpg) [![Build Status](https://travis-ci.org/etkirsch/pyna-rpg.svg?branch=master)](https://travis-ci.org/etkirsch/pyna-rpg) 
-A silly mesh-chat/pyna-colada RPG node very loosely based on d20 RPG rulesets
+# The Legends of Erukar
+[![Code Climate](https://codeclimate.com/github/etkirsch/pyna-rpg/badges/gpa.svg)](https://codeclimate.com/github/etkirsch/pyna-rpg) [![Test Coverage](https://codeclimate.com/github/etkirsch/pyna-rpg/badges/coverage.svg)](https://codeclimate.com/github/etkirsch/pyna-rpg/coverage) [![Issue Count](https://codeclimate.com/github/etkirsch/pyna-rpg/badges/issue_count.svg)](https://codeclimate.com/github/etkirsch/pyna-rpg) [![Build Status](https://travis-ci.org/etkirsch/pyna-rpg.svg?branch=master)](https://travis-ci.org/etkirsch/pyna-rpg) 
+
+A procedurally-generated multiplayer online dungeon (MUD) very loosely based on d20 RPG rulesets.
 
 ## Mechanics
 For the time being, Pyna-RPG uses a simplified Dungeons and Dragons stat system by doing away with mental stats.
@@ -10,6 +12,7 @@ The following attributes range from -2 (base) to 10 (maximum). On creation, a pl
 * **Strength**: Influences damage dealt
 * **Dexterity**: Influences armor, initiative, and attack rolls
 * **Vitality**: Influences health gained per level
+* **Acuity**: Influences skill checks involving observation and investigation
 
 ### Life and Death
 
