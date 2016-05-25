@@ -1,5 +1,5 @@
 from pynarpg.engine.commands.Inspect import Inspect
-from pynarpg.engine.model.DirectionalCommand import DirectionalCommand
+from pynarpg.engine.commands.DirectionalCommand import DirectionalCommand
 from pynarpg.engine.environment.Door import Door
 from pynarpg.engine.environment.Room import Room
 

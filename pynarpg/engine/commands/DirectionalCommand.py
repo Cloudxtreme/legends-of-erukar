@@ -13,7 +13,3 @@ class DirectionalCommand(Command):
 
         return next((x['direction'] for x in couples \
             if any([k == payload for k in x['keywords']])), None)
-
-    def directional_description(self, direction):
-        '''Turns the enumeration into North, East, South, or West'''
-        pass

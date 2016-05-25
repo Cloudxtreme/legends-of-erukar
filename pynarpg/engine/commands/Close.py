@@ -1,4 +1,4 @@
-from pynarpg.engine.model.DirectionalCommand import DirectionalCommand
+from pynarpg.engine.commands.DirectionalCommand import DirectionalCommand
 from pynarpg.engine.environment.Door import Door
 
 class Close(DirectionalCommand):

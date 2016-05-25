@@ -14,6 +14,8 @@ class Command:
     def find_in_room(self, container, item_name):
         '''Attempt to find an item in a room's contents'''
         player = self.find_player()
+        #directions = [container.connections[x]['door'] \
+        #    for x in container.connections if container.connections[x] is not None]
         contents = set(container.contents + player.reverse_index(container))
         return next((p for p in contents if p.matches(item_name)), None)
 

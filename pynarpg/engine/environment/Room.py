@@ -3,7 +3,6 @@ from pynarpg.engine.model.Direction import Direction
 from pynarpg.engine.model.EntityLocation import EntityLocation
 
 class Room(Containable):
-
     def __init__(self):
         super().__init__()
         self.connections = {direction: None for direction in Direction}

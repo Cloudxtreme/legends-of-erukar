@@ -1,4 +1,4 @@
-from pynarpg.engine.model.DirectionalCommand import DirectionalCommand
+from pynarpg.engine.commands.DirectionalCommand import DirectionalCommand
 from pynarpg.engine.model.Containable import Containable
 from pynarpg.engine.model.EntityLocation import EntityLocation
 
@@ -14,21 +14,30 @@ class Inspect(DirectionalCommand):
         direction = self.determine_direction(payload.lower())
 
         if direction is None:
-            if payload in ['','room']: return room.describe()
-            item = self.find_in_room(room, payload)
-            if item is None:
-                return Inspect.not_found.format(payload)
-            return self.inspect_item(item, player)
+            return self.inspect_in_room(player, room, payload)
 
         return room.nesw_descriptions[direction]
 
+    def inspect_in_room(self, player, room, payload):
+        '''Used if the player didn't specify a direction'''
+        if payload in ['','room']:
+            return room.describe()
+
+        item = self.find_in_room(room, payload)
+        if item is not None:
+            return self.inspect_item(item, player)
+
+        return Inspect.not_found.format(payload)
+
     def inspect_item(self, item, player):
+        '''Inspect an item and index it if it's a container'''
         if type(item) is EntityLocation:
             item = item.entity
         self.index(item, player)
         return item.on_inspect(player)
 
     def index(self, container, player):
+        '''Indexes all items in a container for the PlayerNode's indexer'''
         if issubclass(type(container), Containable):
             for i in container.contents:
                 player.index_item(i, container)

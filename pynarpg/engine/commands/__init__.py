@@ -1,5 +1,6 @@
 from pynarpg.engine.commands.Attack import Attack
 from pynarpg.engine.commands.Close import Close
+from pynarpg.engine.commands.DirectionalCommand import DirectionalCommand
 from pynarpg.engine.commands.Equip import Equip
 from pynarpg.engine.commands.Give import Give
 from pynarpg.engine.commands.Inspect import Inspect
@@ -16,6 +17,7 @@ from pynarpg.engine.commands.Use import Use
 __all__ = [
     "Attack",
     "Close",
+    "DirectionalCommand",
     "Equip",
     "Give",
     "Inspect",

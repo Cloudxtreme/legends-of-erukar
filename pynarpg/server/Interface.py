@@ -2,7 +2,7 @@ from pynarpg.engine.factories.FactoryBase import FactoryBase
 from pynarpg.server.DataAccess import DataAccess
 
 class Interface:
-    command_location = 'pynarpg.commands'
+    command_location = 'pynarpg.engine.commands'
     command_does_not_exist = 'The command \'{0}\' was not found.'
 
     def __init__(self):
@@ -20,9 +20,7 @@ class Interface:
     def execute(self, uid, line):
         command, payload = self.command_and_payload(line)
         target_command = '{0}.{1}'.format(Interface.command_location, command.capitalize())
-        generation_parameters = {
-            'sender_uid': uid,
-            'data': self.data }
+        generation_parameters = {'sender_uid': uid, 'data': self.data }
 
         # Now actually make the thing with specified params
         created = self.factory.create_one(target_command, generation_parameters)
@@ -31,7 +29,6 @@ class Interface:
 
         # The Command tcan return something if it needs to for some reason
         return created.execute(payload)
-
 
     def command_and_payload(self, message):
         '''

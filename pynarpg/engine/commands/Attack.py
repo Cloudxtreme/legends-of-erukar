@@ -1,4 +1,5 @@
 from pynarpg.engine.model.Command import Command
+from pynarpg.engine.model.EntityLocation import EntityLocation
 from pynarpg.engine.environment.Corpse import Corpse
 
 class Attack(Command):
@@ -12,7 +13,9 @@ class Attack(Command):
         player = self.find_player()
         target = self.find_in_room(player.character.current_room, target_description)
 
-        if target is None: return Attack.not_found.format(target_description)
+        if target is None:
+            return Attack.not_found.format(target_description)
+        if type(target) is EntityLocation: target = target.entity
         return self.adjudicate_attack(player.character, target)
 
     def adjudicate_attack(self, character, target):
@@ -24,8 +27,8 @@ class Attack(Command):
 
         attack_string = Attack.successful.format(attack_roll, target_name, damage)
         target.take_damage(damage)
-
         if hasattr(target, 'afflictions'):
+            print(target.afflictions)
             if 'dying' in target.afflictions:
                 return Attack.caused_dying.format(attack_string, target_name)
 
