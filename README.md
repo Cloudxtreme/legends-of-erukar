@@ -1,4 +1,4 @@
-# pyna-rpg  [![Code Climate](https://codeclimate.com/github/etkirsch/pyna-rpg/badges/gpa.svg)](https://codeclimate.com/github/etkirsch/pyna-rpg) [![Build Status](https://travis-ci.org/etkirsch/pyna-rpg.svg?branch=master)](https://travis-ci.org/etkirsch/pyna-rpg)
+# pyna-rpg  [![Code Climate](https://codeclimate.com/github/etkirsch/pyna-rpg/badges/gpa.svg)](https://codeclimate.com/github/etkirsch/pyna-rpg) [![Test Coverage](https://codeclimate.com/github/etkirsch/pyna-rpg/badges/coverage.svg)](https://codeclimate.com/github/etkirsch/pyna-rpg/coverage) [![Issue Count](https://codeclimate.com/github/etkirsch/pyna-rpg/badges/issue_count.svg)](https://codeclimate.com/github/etkirsch/pyna-rpg) [![Build Status](https://travis-ci.org/etkirsch/pyna-rpg.svg?branch=master)](https://travis-ci.org/etkirsch/pyna-rpg) 
 A silly mesh-chat/pyna-colada RPG node very loosely based on d20 RPG rulesets
 
 ## Mechanics
@@ -49,7 +49,7 @@ A player's level progression is directly tied to his net wealth. That is to say 
 # TODO: Add decay with asymptote of 0.5. Half-life should be set to yield slightly longer than 0.5 decay.
 SCALAR = 0.9 - player.level*(0.9 / max_player_level)
 
-player.net_worth = player.money + SCALAR*sum(player.inventory.value)
+player.net_worth = player.money + SCALAR*sum(player.engine.inventory.value)
 ```
 
 This effectively creates a tradeoff between purchasing items and having levels, as you can decrease in levels due to buying items.
