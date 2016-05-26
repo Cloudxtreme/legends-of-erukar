@@ -1,5 +1,7 @@
+from . import FactoryBase
+
 class ProceduralFactory(FactoryBase):
-    def generate(self, distribution):
+    def generate(self):
         '''
         Here, the programmer specifies a distribution that is relevant.
         Examples:

@@ -5,5 +5,6 @@ from erukar.engine.environment.EnvironmentPiece import EnvironmentPiece
 from erukar.engine.environment.Door import Door
 from erukar.engine.environment.Room import Room
 from erukar.engine.environment.Trap import Trap
+from erukar.engine.environment.Wall import Wall
 
-__all__ = ["Container", "Corpse", "Decoration", "Door", "EnvironmentPiece", "Room", "Trap"]
+__all__ = ["Container", "Corpse", "Decoration", "Door", "EnvironmentPiece", "Room", "Trap", "Wall"]

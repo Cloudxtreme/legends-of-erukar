@@ -4,6 +4,7 @@ from erukar.engine.model.EntityLocation import EntityLocation
 
 class Inspect(DirectionalCommand):
     not_found = "Nothing matching '{0}' was found in this room."
+    abyss = "There is nothing to your {0} except the abyss... plain and nothingness forever."
     def __init__(self):
         super().__init__()
 
@@ -16,7 +17,13 @@ class Inspect(DirectionalCommand):
         if direction is None:
             return self.inspect_in_room(player, room, payload)
 
-        return room.nesw_descriptions[direction]
+        if room.connections[direction] is None:
+            return Inspect.abyss.format(direction.name)
+
+        if room.connections[direction]['door'] is not None:
+            return room.connections[direction]['door'].on_inspect(direction.name)
+
+        return room.connections[direction]['room'].on_inspect(direction.name)
 
     def inspect_in_room(self, player, room, payload):
         '''Used if the player didn't specify a direction'''

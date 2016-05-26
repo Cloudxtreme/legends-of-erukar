@@ -8,5 +8,5 @@ class Door(RpgEntity):
     def __init__(self):
         self.status = Door.Closed
 
-    def on_inspect(self, *_):
-        return "There is a door"
+    def on_inspect(self, direction):
+        return "This is a door to the {0}".format(direction)
