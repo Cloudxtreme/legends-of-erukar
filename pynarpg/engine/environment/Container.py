@@ -2,11 +2,11 @@ from pynarpg.engine.model.Containable import Containable
 from pynarpg.engine.environment.EnvironmentPiece import EnvironmentPiece
 
 class Container(Containable, EnvironmentPiece):
-    def __init__(self, aliases, description, results):
+    def __init__(self, aliases, description, inspect_results):
         Containable.__init__(self)
         self.aliases = aliases
         self.description = description
-        self.results = results
+        self.results = inspect_results
 
     def on_open(self, sender):
         return "Opened a chest"

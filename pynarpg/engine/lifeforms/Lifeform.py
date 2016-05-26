@@ -1,7 +1,7 @@
 from pynarpg.engine.model.RpgEntity import RpgEntity
 
 class Lifeform(RpgEntity):
-    attribute_types = ["strength", "dexterity", "vitality"]
+    attribute_types = ["strength", "dexterity", "vitality", "acuity"]
     attribute_value_default = -2
     attack_damage_attribute = "strength"
     attack_roll_attribute = "dexterity"
@@ -48,7 +48,8 @@ class Lifeform(RpgEntity):
         '''Attack another lifeform'''
         # Send a message that the player cannot attack without a weapon
         armor_class = target.calculate_armor_class()
-        if self.weapon is None: return [0, armor_class, 0]
+        if self.weapon is None:
+            return [0, armor_class, 0]
 
         attack_roll = self.roll(self.skill_roll_string(Lifeform.attack_roll_attribute))
         damage = self.weapon.roll() + self.get(Lifeform.attack_damage_attribute)

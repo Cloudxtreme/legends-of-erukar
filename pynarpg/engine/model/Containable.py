@@ -6,8 +6,8 @@ class Containable(RpgEntity):
         self.contents = []
         self.description = ""
 
-    def add(self, item, adjective, preposition, plural=False):
-        self.contents.append(EntityLocation(item, adjective, preposition, plural))
+    def add(self, article, item, preposition, plural=False):
+        self.contents.append(EntityLocation(item, article, preposition, plural))
 
     def describe(self):
         return ' '.join([self.description] + [c.describe() for c in self.contents if c.describe() is not None])

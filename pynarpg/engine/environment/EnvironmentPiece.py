@@ -2,10 +2,10 @@ from pynarpg.engine.model.RpgEntity import RpgEntity
 import random
 
 class EnvironmentPiece(RpgEntity):
-    def __init__(self, aliases, description, results):
+    def __init__(self, aliases, description, inspect_results):
         super().__init__()
         self.aliases = aliases
-        self.inspect_results = results
+        self.inspect_results = inspect_results
         self.description = description
 
     def on_inspect(self, *_):
