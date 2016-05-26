@@ -1,8 +1,8 @@
-from pynarpg import *
+from erukar import *
 import unittest
 
 class RandomizedEntityFactoryTests(unittest.TestCase):
-    generated_class = 'pynarpg.engine.inventory.Armor'
+    generated_class = 'erukar.engine.inventory.Armor'
 
     def test_create_template(self):
         g = RandomizedEntityFactory()

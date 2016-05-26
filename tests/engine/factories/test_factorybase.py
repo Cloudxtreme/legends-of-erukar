@@ -1,14 +1,14 @@
-from pynarpg import *
+from erukar import *
 import unittest
 
 class FactoryBaseTests(unittest.TestCase):
-    generated_class = 'pynarpg.engine.inventory.Weapon'
+    generated_class = 'erukar.engine.inventory.Weapon'
 
     def test_module_and_type(self):
         g = FactoryBase()
         module, ctype = g.module_and_type(FactoryBaseTests.generated_class)
 
-        self.assertEqual(module.__name__, 'pynarpg')
+        self.assertEqual(module.__name__, 'erukar')
         self.assertEqual(ctype, 'Weapon')
 
     def test_create_template(self):

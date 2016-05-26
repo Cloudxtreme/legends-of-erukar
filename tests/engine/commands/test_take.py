@@ -1,4 +1,4 @@
-from pynarpg import *
+from erukar import *
 import unittest
 
 class TakeTests(unittest.TestCase):
@@ -13,7 +13,7 @@ class TakeTests(unittest.TestCase):
         w.item_type = 'Sword'
         r = Room()
         p.current_room = r
-        r.add(w,'a','on the floor')
+        r.add(article='a', item=w, preposition='on the floor')
 
         t = Take()
         t.sender_uid = p.uid

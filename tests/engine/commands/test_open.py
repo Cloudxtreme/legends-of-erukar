@@ -1,4 +1,4 @@
-from pynarpg import *
+from erukar import *
 import unittest
 
 class OpenTests(unittest.TestCase):
@@ -115,8 +115,8 @@ class OpenTests(unittest.TestCase):
 
         n = Room()
         p.current_room = n
-        chest = Container(['chest'],'','')
-        n.add(chest, 'a', 'on')
+        chest = Container(aliases=['chest'], description='', inspect_results='')
+        n.add(article='a', item=chest, preposition='on')
 
         o = Open()
         o.sender_uid = p.uid

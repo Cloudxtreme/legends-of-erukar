@@ -3,4 +3,4 @@ python:
   - "3.4"
   - "3.5"
 # command to run tests
-script: nosetests tests/*/**.py
+script: python -m unittest discover -s tests

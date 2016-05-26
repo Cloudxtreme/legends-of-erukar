@@ -1,4 +1,4 @@
-from pynarpg import *
+from erukar import *
 
 i = Interface()
 
