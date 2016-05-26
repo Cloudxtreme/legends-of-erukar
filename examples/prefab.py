@@ -1,12 +1,7 @@
 from erukar import *
+from examples.helpers.ExampleRunner import ExampleRunner
 
-i = Interface()
-
-p = Player()
-p.uid = 'Bob'
-p.define_stats({'dexterity': 4})
-
-i.data.players.append(PlayerNode(p.uid, p))
+runner = ExampleRunner()
 
 # North Room
 n = Room()
@@ -41,13 +36,6 @@ s.add(article='a', item=l, preposition='on the floor')
 d = Door()
 c.coestablish_connection(Direction.North, n, None)
 c.coestablish_connection(Direction.South, s, d)
-p.current_room = n
+runner.set_room(n)
 
-# Inspect the room (this will occur on join)
-print(i.execute(p.uid, 'inspect'))
-while True:
-    line = input('> ')
-    print('')
-    res = i.execute(p.uid, line)
-    if res is not None:
-        print(res)
+runner.start()
