@@ -1,12 +1,12 @@
 from erukar.engine.model.Containable import Containable
 from erukar.engine.model.Direction import Direction
 from erukar.engine.model.EntityLocation import EntityLocation
+from erukar.engine.environment import Door, Wall
 
 class Room(Containable):
     def __init__(self):
         super().__init__()
         self.connections = {direction: None for direction in Direction}
-        self.nesw_descriptions = {direction: 'TBD' for direction in Direction}
 
     def connect_room(self, direction, other_room, door=None):
         self.connections[direction] = { "room": other_room, "door": door}
@@ -23,7 +23,27 @@ class Room(Containable):
         other_room.connect_room(self.invert_direction(direction), self, door)
 
     def on_inspect(self, direction):
-        return self.describe()
+        return self.description
 
     def inspect_peek(self, direction):
-        return 'To your {0} you see a room. {1}'.format(direction, self.describe())
+        return 'To your {0} you see a room.'.format(direction)
+
+    def describe_in_direction(self, direction, draw_walls=False):
+        con = self.connections[direction]
+
+        if con is not None:
+            if con['door'] is not None:
+                if type(con['door']) is Wall and draw_walls:
+                    return con['door'].on_inspect(direction.name)
+                if type(con['door']) is Door and con['door'].status != Door.Open:
+                    return con['door'].on_inspect(direction.name)
+
+            if 'room' in con and con['room'] is not None:
+                return con['room'].inspect_peek(direction.name)
+
+        return None
+
+    def describe(self):
+        dirs = [self.describe_in_direction(d, draw_walls=True) for d in self.connections]
+        contents = [c.describe() for c in self.contents if c.describe() is not None]
+        return ' '.join([self.description] + contents + ['\n'+d for d in dirs if d is not None])

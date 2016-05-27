@@ -21,9 +21,8 @@ class DungeonGeneratorTests(unittest.TestCase):
     def test_generate_descriptions_should_add_generic_descriptions(self):
         rooms = [Room()]
         self.gen.generate_descriptions(rooms)
-        r = rooms[0]
 
-        self.assertEqual(r.description, "This is the 0th room")
+        self.assertEqual(rooms[0].description, "This is the 0th room.")
 
     def test_fill_walls_should_not_have_abysses(self):
         rooms = [Room()]
@@ -39,5 +38,4 @@ class DungeonGeneratorTests(unittest.TestCase):
         self.gen.connect_rooms(rooms)
 
         dirs = self.gen.possible_directions(rooms[0])
-
         self.assertEqual(len(dirs), 3)

@@ -28,7 +28,7 @@ class DungeonGenerator(FactoryBase):
     def generate_descriptions(self, rooms):
         ''' Add descriptions '''
         for r,i in zip(rooms, range(len(rooms))):
-            r.description = 'This is the {0}th room'.format(i)
+            r.description = 'This is the {0}th room.'.format(i)
 
     def fill_walls(self, rooms):
         '''Fill in the abyss with walls (ugly, need to optimize)'''

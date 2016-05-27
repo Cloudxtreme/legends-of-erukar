@@ -17,13 +17,12 @@ class Inspect(DirectionalCommand):
         if direction is None:
             return self.inspect_in_room(player, room, payload)
 
-        if room.connections[direction] is None:
-            return Inspect.abyss.format(direction.name)
+        result = room.describe_in_direction(direction)
+        if result is not None:
+            return result
 
-        if room.connections[direction]['door'] is not None:
-            return room.connections[direction]['door'].on_inspect(direction.name)
+        return Inspect.abyss.format(direction.name)
 
-        return room.connections[direction]['room'].on_inspect(direction.name)
 
     def inspect_in_room(self, player, room, payload):
         '''Used if the player didn't specify a direction'''

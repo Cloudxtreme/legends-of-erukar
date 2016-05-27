@@ -1,7 +1,6 @@
 from erukar.engine.commands.Inspect import Inspect
 from erukar.engine.commands.DirectionalCommand import DirectionalCommand
-from erukar.engine.environment.Door import Door
-from erukar.engine.environment.Room import Room
+from erukar.engine.environment import *
 
 class Move(DirectionalCommand):
     move_through_wall = 'You attempt to pass through a wall with no luck'
@@ -20,8 +19,11 @@ class Move(DirectionalCommand):
 
         # determine if the door prevents movement
         door = in_direction['door']
-        if door is not None and door.status is not Door.Open:
-            return Move.move_through_closed_door
+        if door is not None:
+            if type(door) is Door and door.status is not Door.Open:
+                return Move.move_through_closed_door
+            if type(door) is Wall:
+                return Move.move_through_wall
 
         # Move and autoinspect the room for the player
         return self.change_room(player, in_direction['room'], direction)

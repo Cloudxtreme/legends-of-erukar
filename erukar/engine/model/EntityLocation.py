@@ -4,7 +4,9 @@ import random
 class EntityLocation(RpgEntity):
     description_types = [
         'there {0} {1} {2} {3} {4}',
-        '{3} {4} {0} {1} {2}'
+        '{3} {4} {0} {1} {2}',
+        '{3} {4} there {0} {1} {2}',
+        '{3} {4} of this room there {0} {1} {2}'
     ]
 
     def __init__(self, entity, article, preposition, plural=False):
