@@ -23,4 +23,7 @@ class Room(Containable):
         other_room.connect_room(self.invert_direction(direction), self, door)
 
     def on_inspect(self, direction):
+        return self.describe()
+
+    def inspect_peek(self, direction):
         return 'To your {0} you see a room. {1}'.format(direction, self.describe())
