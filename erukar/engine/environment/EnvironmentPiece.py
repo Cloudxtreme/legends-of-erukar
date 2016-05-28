@@ -2,14 +2,13 @@ from erukar.engine.model.RpgEntity import RpgEntity
 import random
 
 class EnvironmentPiece(RpgEntity):
-    def __init__(self, aliases, description, inspect_results):
+    def __init__(self, aliases, inspect_results):
         super().__init__()
         self.aliases = aliases
-        self.inspect_results = inspect_results
-        self.description = description
+        self.description = inspect_results
 
     def on_inspect(self, *_):
-        return self.inspect_results
+        return self.describe()
 
     def matches(self, query):
         return any([query in alias for alias in self.aliases])

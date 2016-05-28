@@ -115,7 +115,7 @@ class CloseTests(unittest.TestCase):
 
         n = Room()
         p.current_room = n
-        chest = Container(aliases=['chest'], description='', inspect_results='')
+        chest = Container(aliases=['chest'], inspect_results='')
         n.add(article='a', item=chest, preposition='on')
 
         o = Close()
