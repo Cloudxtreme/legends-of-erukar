@@ -22,22 +22,24 @@ class DungeonGenerator(FactoryBase):
         return rooms
 
     def map_to_string(self):
-        maxes = [max([m[i] for m in self.dungeon_map]) for i in range(2)]
-        mins = [min([m[i] for m in self.dungeon_map]) for i in range(2)]
+        '''Converts the dungeon_map into a readable map for the user'''
+        max_x, max_y = [max([m[i] for m in self.dungeon_map]) for i in range(2)]
+        min_x, min_y = [min([m[i] for m in self.dungeon_map]) for i in range(2)]
 
         # This really should be cleaned up
         result_str = ''
-        for y in range(mins[1], maxes[1]+1):
-            new_row = ''
-            for x in range(mins[0], maxes[0]+1):
-                if (x,y) in self.dungeon_map:
-                    if (x,y) == (0,0):
-                        new_row += 'O'
-                    else:
-                        new_row += '#'
-                else:
-                    new_row += ' '
-            result_str = new_row + '\n' + result_str
+        for y in range(min_y-1, max_y+1):
+            # new_row is used to prevent dealing with immutability in strings
+            new_row = [' ' for i in range(min_x-1, max_x+1)]
+            for x in [xi for xi in range(min_x-1, max_x+1) if (xi,y) in self.dungeon_map]:
+                # The actual indices may be negative, so account for that
+                pt_index = x - min_x
+                # default to a hash as it is the most probable option
+                new_row[pt_index] = '#'
+                # For origin
+                if (x,y) == (0,0):
+                    new_row[pt_index] = 'o'
+            result_str = ''.join(new_row) + '\n' + result_str
         return result_str
 
     def connect_rooms(self, rooms):
@@ -46,9 +48,7 @@ class DungeonGenerator(FactoryBase):
         rooms[0].coordinates = (0,0)
         self.connect_randomly(rooms[0], rooms[1])
 
-
         while any(self.unconnected(rooms)):
-            print(len(self.unconnected(rooms)))
             origin_room = random.choice(self.connected(rooms))
             next_room = random.choice(self.unconnected(rooms))
             self.connect_randomly(origin_room, next_room)
