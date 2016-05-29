@@ -7,5 +7,6 @@ runner = ExampleRunner()
 d = DungeonGenerator()
 
 rooms = d.generate()
+print(d.map_to_string())
 runner.set_room(rooms[0])
 runner.start()

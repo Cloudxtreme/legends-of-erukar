@@ -19,16 +19,45 @@ class DungeonGenerator(FactoryBase):
         self.connect_rooms(rooms)
         self.generate_descriptions(rooms)
         self.fill_walls(rooms)
-
         return rooms
+
+    def map_to_string(self):
+        maxes = [max([m[i] for m in self.dungeon_map]) for i in range(2)]
+        mins = [min([m[i] for m in self.dungeon_map]) for i in range(2)]
+
+        # This really should be cleaned up
+        result_str = ''
+        for y in range(mins[1], maxes[1]+1):
+            new_row = ''
+            for x in range(mins[0], maxes[0]+1):
+                if (x,y) in self.dungeon_map:
+                    if (x,y) == (0,0):
+                        new_row += 'O'
+                    else:
+                        new_row += '#'
+                else:
+                    new_row += ' '
+            result_str = new_row + '\n' + result_str
+        return result_str
 
     def connect_rooms(self, rooms):
         '''Connect a list of rooms to each other'''
         self.dungeon_map[(0,0)] = rooms[0]
         rooms[0].coordinates = (0,0)
+        self.connect_randomly(rooms[0], rooms[1])
 
-        for origin, dest in zip(rooms, rooms[1:]):
-            self.connect_randomly(origin, dest)
+
+        while any(self.unconnected(rooms)):
+            print(len(self.unconnected(rooms)))
+            origin_room = random.choice(self.connected(rooms))
+            next_room = random.choice(self.unconnected(rooms))
+            self.connect_randomly(origin_room, next_room)
+
+    def connected(self, rooms):
+        return [r for r in rooms if len(self.possible_directions(r)) < 4]
+
+    def unconnected(self, rooms):
+        return [r for r in rooms if len(self.possible_directions(r)) == 4]
 
     def generate_descriptions(self, rooms):
         ''' Add descriptions '''
