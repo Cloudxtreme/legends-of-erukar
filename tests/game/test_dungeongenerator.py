@@ -22,7 +22,7 @@ class DungeonGeneratorTests(unittest.TestCase):
         rooms = [Room()]
         self.gen.generate_descriptions(rooms)
 
-        self.assertEqual(rooms[0].description, "This is the 0th room.")
+        self.assertEqual(rooms[0].description, "This is the 0th room at (0, 0).")
 
     def test_fill_walls_should_not_have_abysses(self):
         rooms = [Room()]

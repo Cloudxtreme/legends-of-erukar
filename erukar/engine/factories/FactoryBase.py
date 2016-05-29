@@ -3,8 +3,8 @@ from erukar.engine.model.RpgEntity import RpgEntity
 class FactoryBase(RpgEntity):
     def module_and_type(self, type_to_generate):
         '''
-        Split a string like 'erukar.engine.inventory.armor' into 'erukar.inventory'
-        and 'armor'
+        Split a string like 'erukar.engine.inventory.armor' into
+        'erukar.engine.inventory' and 'armor'
         '''
         split_results = type_to_generate.split('.')
         module_name = '.'.join(split_results[:-1])
