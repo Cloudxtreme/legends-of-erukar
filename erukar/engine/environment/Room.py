@@ -10,7 +10,8 @@ class Room(Containable):
         self.connections = {direction: None for direction in Direction}
 
     def connect_room(self, direction, other_room, door=None):
-        self.connections[direction] = { "room": other_room, "door": door}
+        if other_room is not self:
+            self.connections[direction] = { "room": other_room, "door": door}
 
     def invert_direction(self, direction):
         return Direction( (direction.value + 2) % 4 )

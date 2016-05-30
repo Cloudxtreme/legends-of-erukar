@@ -7,7 +7,9 @@ import math, random
 class DungeonGenerator(FactoryBase):
     minimum_rooms = 3
     def __init__(self):
+        # the following will belong on a Dungeon object that will be passed around
         self.dungeon_map = {}
+        self.rooms = []
 
     def generate(self):
         num_rooms = math.floor(np.random.gamma(7.5, 1.0)) + DungeonGenerator.minimum_rooms
@@ -15,11 +17,11 @@ class DungeonGenerator(FactoryBase):
 
     def create_rooms(self, num_rooms):
         '''Create X number of rooms'''
-        rooms = [Room() for x in range(num_rooms)]
-        self.connect_rooms(rooms)
-        self.generate_descriptions(rooms)
-        self.fill_walls(rooms)
-        return rooms
+        self.rooms = [Room() for x in range(num_rooms)]
+        self.connect_rooms()
+        self.generate_descriptions()
+        self.fill_walls()
+        return self.rooms
 
     def map_to_string(self):
         '''Converts the dungeon_map into a readable map for the user'''
@@ -42,43 +44,52 @@ class DungeonGenerator(FactoryBase):
             result_str = ''.join(new_row) + '\n' + result_str
         return result_str
 
-    def connect_rooms(self, rooms):
+    def connect_rooms(self):
         '''Connect a list of rooms to each other'''
-        self.dungeon_map[(0,0)] = rooms[0]
-        rooms[0].coordinates = (0,0)
-        self.connect_randomly(rooms[0], rooms[1])
+        self.dungeon_map[(0,0)] = self.rooms[0]
 
-        while any(self.unconnected(rooms)):
-            origin_room = random.choice(self.connected(rooms))
-            next_room = random.choice(self.unconnected(rooms))
-            self.connect_randomly(origin_room, next_room)
+        for origin_room, index in zip(self.rooms, range(len(self.rooms))):
+            self.generate_connections(origin_room, index)
 
-    def connected(self, rooms):
-        return [r for r in rooms if len(self.possible_directions(r)) < 4]
+    def connected(self):
+        return [r for r in self.rooms if len(self.possible_directions(r)) < 4]
 
-    def unconnected(self, rooms):
-        return [r for r in rooms if len(self.possible_directions(r)) == 4]
+    def unconnected(self):
+        return [r for r in self.rooms if len(self.possible_directions(r)) == 4]
 
-    def generate_descriptions(self, rooms):
+    def generate_descriptions(self):
         ''' Add descriptions '''
-        for r,i in zip(rooms, range(len(rooms))):
+        for r,i in zip(self.rooms, range(len(self.rooms))):
             r.description = 'This is the {0}th room at ({1}, {2}).'.format(i, *r.coordinates)
 
-    def fill_walls(self, rooms):
+    def fill_walls(self):
         '''Fill in the abyss with walls (ugly, need to optimize)'''
-        for room in rooms:
+        for room in self.rooms:
             for direction in self.possible_directions(room):
                 room.connections[direction] = { 'door': Wall() }
 
-    def connect_randomly(self, origin, destination):
+    def generate_connections(self, origin, index):
+        num_connections = max(0, len(self.rooms) - index - self.number_of_connections())
+        for connection_num in range(num_connections):
+            self.connect_randomly(origin)
+
+    def connect_randomly(self, origin):
         '''Connect a room (origin) to a destination room in some random direction'''
-        directions = self.possible_directions(destination)
+        directions = self.possible_directions(origin)
         if not any(directions): return
+
+        # Use the origin room and look in each direction
+        # if there's a room there, connect to it.
+        # If not, grab a room with empty coordinates that isn't origin
 
         direction = random.choice(directions)
         new_coords = self.to_coordinate(origin.coordinates, direction)
         if new_coords in self.dungeon_map:
             destination = self.dungeon_map[new_coords]
+        else:
+            if len(self.unconnected()) == 0:
+                return
+            destination = self.unconnected()[0]
 
         origin.coestablish_connection(direction, destination)
         destination.coordinates = self.to_coordinate(origin.coordinates, direction)
@@ -90,7 +101,9 @@ class DungeonGenerator(FactoryBase):
         return [d for d in room.connections if room.connections[d] is None]
 
     def number_of_connections(self):
-        return math.ceil(math.sqrt(random.uniform(0, 1)*10))-1
+        # y = 1 + heaviside(x-0.6) + heaviside(x-0.9) from x=[0, 1.0]
+        rand = random.random()
+        return 1 + sum([1 for pct in [0.66, 0.92] if rand > pct])
 
     def to_coordinate(self, origin_coord, direction):
         '''Hmm, how do I clean this up?'''
