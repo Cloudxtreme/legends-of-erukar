@@ -33,20 +33,19 @@ class DungeonGenerator(FactoryBase):
         max_x, max_y = [max([m[i] for m in self.dungeon_map]) for i in range(2)]
         min_x, min_y = [min([m[i] for m in self.dungeon_map]) for i in range(2)]
 
+        out_matrix = [[' ' for x in range(min_x, max_x+1)] for y in range(min_y, max_y+1)]
+
         # This really should be cleaned up
-        result_str = ''
-        for y in range(min_y-1, max_y+1):
-            # new_row is used to prevent dealing with immutability in strings
-            new_row = [' ' for i in range(min_x-1, max_x+1)]
-            for x in [xi for xi in range(min_x-1, max_x+1) if (xi,y) in self.dungeon_map]:
-                # The actual indices may be negative, so account for that
-                pt_index = x - min_x
-                # default to a hash as it is the most probable option
-                new_row[pt_index] = '#'
-                # For origin
-                if (x,y) == (0,0):
-                    new_row[pt_index] = 'o'
-            result_str = ''.join(new_row) + '\n' + result_str
+        result_str = ' '
+        for (x,y) in self.dungeon_map:
+            out_matrix[y - min_y][x - min_x] = '#'
+#
+        # ALWAYS have the origin at 0,0
+        out_matrix[-min_y][-min_x] = 'o'
+
+        for y in reversed(range(max_y-min_y)):
+            result_str += '\n' + ''.join(out_matrix[y])
+
         return result_str
 
     def connect_rooms(self):
