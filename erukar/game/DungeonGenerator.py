@@ -28,26 +28,11 @@ class DungeonGenerator(FactoryBase):
         self.fill_walls()
         return self.rooms
 
-    def map_to_string(self):
-        '''Converts the dungeon_map into a readable map for the user'''
-        max_x, max_y = map(max, zip(*self.dungeon_map))
-        min_x, min_y = map(min, zip(*self.dungeon_map))
-
-        # Adjust these such that we account for the borders
-        dnjn_map = [['□' if (x,y) in self.dungeon_map else '■'
-            for x in range(min_x-1, max_x+2)] for y in range(min_y-1, max_y+2)]
-
-        # ALWAYS have the origin at 0,0
-        dnjn_map[1-min_y][1-min_x] = 'X'
-
-        return '\n'.join(' '.join(y) for y in reversed(dnjn_map))
-
     def connect_rooms(self):
         '''Connect a list of rooms to each other'''
-        for origin, index in zip(self.rooms, range(len(self.rooms))):
-            num_connections = self.number_of_connections()
-            for connection_num in range(num_connections):
-                self.connect_randomly(origin)
+        for index, room in enumerate(self.rooms):
+            for connection_num in range(self.number_of_connections()):
+                self.connect_randomly(room)
 
     def unconnected(self):
         '''Shortcut to a generator that provides unconnected rooms'''
@@ -55,7 +40,7 @@ class DungeonGenerator(FactoryBase):
 
     def generate_descriptions(self):
         ''' Add descriptions '''
-        for r,i in zip(self.rooms, range(len(self.rooms))):
+        for i,r in enumerate(self.rooms):
             r.description = 'This is the {0}th room at ({1}, {2}).'.format(i, *r.coordinates)
 
     def fill_walls(self):
@@ -105,8 +90,8 @@ class DungeonGenerator(FactoryBase):
 
         # evaluate a random number vs. the random_set
         rand = random.random()
-        directional_matches = [dirs[i] for i in range(len(dirs)) if rand > random_set[i]]
-        return Direction(directional_matches[-1])
+        random_direction = [dirs[i] for i, _ in enumerate(dirs) if rand > random_set[i]][-1]
+        return Direction(random_direction)
 
     def number_of_connections(self):
         '''
@@ -116,7 +101,7 @@ class DungeonGenerator(FactoryBase):
         branching_probabilities
         '''
         rand = random.random()
-        return sum([1 for pct in self.branching_probabilities if rand > pct])
+        return sum(1 for pct in self.branching_probabilities if rand > pct)
 
     def to_coordinate(self, origin_coord, direction):
         '''Hmm, how do I clean this up?'''

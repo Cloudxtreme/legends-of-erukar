@@ -30,11 +30,7 @@ class Move(DirectionalCommand):
 
     def change_room(self, player, new_room, direction):
         '''Used to transfer the character from one room to the next'''
-        character = player.character
-        if character in character.current_room.contents:
-            character.current_room.contents.remove(character)
-        new_room.contents.append(character)
-        character.current_room = new_room
+        player.move_to_room(new_room)
 
         i = Inspect()
         i.data = self.data

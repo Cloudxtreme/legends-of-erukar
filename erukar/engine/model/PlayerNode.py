@@ -5,6 +5,7 @@ class PlayerNode:
         self.uid = uid
         self.character = character
         self.item_indexer = {}
+        self.dungeon_map = {}
 
     def index_item(self, item, container):
         '''Used to store to traverse paths through a container tree to find an object'''
@@ -27,3 +28,10 @@ class PlayerNode:
     def remove_index(self, item):
         if item in self.item_indexer:
             self.item_indexer.pop(item, None)
+
+    def move_to_room(self, room):
+        if self.character in self.character.current_room.contents:
+            self.character.current_room.contents.remove(self.character)
+        self.character.link_to_room(room)
+        if room.coordinates not in self.dungeon_map:
+            self.dungeon_map[room.coordinates] = room

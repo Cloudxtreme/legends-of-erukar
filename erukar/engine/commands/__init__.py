@@ -6,6 +6,7 @@ from erukar.engine.commands.Give import Give
 from erukar.engine.commands.Inspect import Inspect
 from erukar.engine.commands.Inventory import Inventory
 from erukar.engine.commands.Join import Join
+from erukar.engine.commands.Map import Map
 from erukar.engine.commands.Move import Move
 from erukar.engine.commands.Open import Open
 from erukar.engine.commands.Quit import Quit
@@ -23,6 +24,7 @@ __all__ = [
     "Inspect",
     "Inventory",
     "Join",
+    "Map",
     "Move",
     "Open",
     "Quit",
