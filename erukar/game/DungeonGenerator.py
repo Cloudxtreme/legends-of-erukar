@@ -30,15 +30,17 @@ class DungeonGenerator(FactoryBase):
 
     def map_to_string(self):
         '''Converts the dungeon_map into a readable map for the user'''
-        max_x, max_y = [max([m[i] for m in self.dungeon_map]) for i in range(2)]
-        min_x, min_y = [min([m[i] for m in self.dungeon_map]) for i in range(2)]
+        max_x, max_y = map(max, zip(*self.dungeon_map))
+        min_x, min_y = map(min, zip(*self.dungeon_map))
 
-        dnjn_map = [['#' if (x,y) in self.dungeon_map else ' ' for x in range(min_x, max_x+1)] for y in range(min_y, max_y+1)]
-##
+        # Adjust these such that we account for the borders
+        dnjn_map = [['□' if (x,y) in self.dungeon_map else '■'
+            for x in range(min_x-1, max_x+2)] for y in range(min_y-1, max_y+2)]
+
         # ALWAYS have the origin at 0,0
-        dnjn_map[-min_y][-min_x] = 'o'
+        dnjn_map[1-min_y][1-min_x] = 'X'
 
-        return '\n'.join(''.join(map(str, y)) for y in reversed(dnjn_map))
+        return '\n'.join(' '.join(y) for y in reversed(dnjn_map))
 
     def connect_rooms(self):
         '''Connect a list of rooms to each other'''
@@ -48,7 +50,8 @@ class DungeonGenerator(FactoryBase):
                 self.connect_randomly(origin)
 
     def unconnected(self):
-        return [r for r in self.rooms[1:] if len(self.possible_directions(r)) == 4]
+        '''Shortcut to a generator that provides unconnected rooms'''
+        return (r for r in self.rooms[1:] if len(self.possible_directions(r)) == 4)
 
     def generate_descriptions(self):
         ''' Add descriptions '''
@@ -70,9 +73,9 @@ class DungeonGenerator(FactoryBase):
         if new_coords in self.dungeon_map:
             destination = self.dungeon_map[new_coords]
         else:
-            uncon = self.unconnected()
-            if len(uncon) == 0: return
-            destination = uncon[0]
+            uncon = next(self.unconnected(), None)
+            if uncon is None: return
+            destination = uncon
 
         origin.coestablish_connection(direction, destination)
         self.link_coordinates_to_room(new_coords, destination)
