@@ -4,9 +4,9 @@ from erukar.engine.model.EntityLocation import EntityLocation
 from erukar.engine.environment import Door, Wall
 
 class Room(Containable):
-    def __init__(self):
+    def __init__(self, coordinates=(0,0)):
         super().__init__()
-        self.coordinates = (0, 0)
+        self.coordinates = coordinates
         self.connections = {direction: None for direction in Direction}
 
     def connect_room(self, direction, other_room, door=None):

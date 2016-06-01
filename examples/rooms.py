@@ -6,6 +6,6 @@ print('Room Generation Example: Basically just a randomly generated hallway righ
 runner = ExampleRunner()
 d = DungeonGenerator()
 
-rooms = d.generate()
-runner.set_room(rooms[0])
+dungeon = d.generate()
+runner.set_room(dungeon.rooms[0])
 runner.start()
