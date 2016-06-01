@@ -1,3 +1,1 @@
-from erukar.game.DungeonGenerator import DungeonGenerator
-
-__all__ = ["DungeonGenerator"]
+from erukar.game.modifiers import *
