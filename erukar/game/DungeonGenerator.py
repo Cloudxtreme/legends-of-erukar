@@ -33,20 +33,12 @@ class DungeonGenerator(FactoryBase):
         max_x, max_y = [max([m[i] for m in self.dungeon_map]) for i in range(2)]
         min_x, min_y = [min([m[i] for m in self.dungeon_map]) for i in range(2)]
 
-        out_matrix = [[' ' for x in range(min_x, max_x+1)] for y in range(min_y, max_y+1)]
-
-        # This really should be cleaned up
-        result_str = ' '
-        for (x,y) in self.dungeon_map:
-            out_matrix[y - min_y][x - min_x] = '#'
-#
+        dnjn_map = [['#' if (x,y) in self.dungeon_map else ' ' for x in range(min_x, max_x+1)] for y in range(min_y, max_y+1)]
+##
         # ALWAYS have the origin at 0,0
-        out_matrix[-min_y][-min_x] = 'o'
+        dnjn_map[-min_y][-min_x] = 'o'
 
-        for y in reversed(range(max_y-min_y)):
-            result_str += '\n' + ''.join(out_matrix[y])
-
-        return result_str
+        return '\n'.join(''.join(map(str, y)) for y in reversed(dnjn_map))
 
     def connect_rooms(self):
         '''Connect a list of rooms to each other'''
