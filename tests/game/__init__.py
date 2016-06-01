@@ -1,1 +1,1 @@
-from tests.game.test_dungeongenerator import DungeonGeneratorTests
+from tests.game.modifiers import *

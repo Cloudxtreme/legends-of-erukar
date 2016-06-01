@@ -9,7 +9,7 @@ class Modifier:
         '''Allows explicit permission and explicit prohibition'''
         self.permitted_entities = []
         self.prohibited_entities = []
-        self.permission_type = Modifier.ALL_PERMITTED
+        self.permission_type = Modifier.ALL
 
     def modify(self, entity):
         '''Safe-guarded modification entry point'''
@@ -30,6 +30,9 @@ class Modifier:
             return not any(r for r in self.prohibited_entities if r == type(entity))
 
         if self.permission_type is Modifier.ALL_PERMITTED:
-            return any(r for r in self.permitted_entities if r == type(entity))
+            return self.is_in_group(entity, self.permitted_entities)
 
         return not (self.permission_type is Modifier.NONE)
+
+    def is_in_group(self, entity, group):
+        return any(r for r in group if r == type(entity) or issubclass(type(entity), r))

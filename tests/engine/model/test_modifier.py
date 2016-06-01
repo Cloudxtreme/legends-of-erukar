@@ -57,3 +57,10 @@ class ModifierTests(unittest.TestCase):
         result = m.can_apply_to(w)
 
         self.assertEqual(result, False)
+
+    def test_is_in_group_works_if_subclass(self):
+        m = Modifier()
+        w = Weapon()
+        result = m.is_in_group(w, [Item])
+
+        self.assertEqual(result, True)
