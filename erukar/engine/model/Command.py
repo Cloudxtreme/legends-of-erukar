@@ -21,6 +21,4 @@ class Command:
 
     def find_in_inventory(self, player, item_name):
         '''Attempt to find an item in a player's inventory'''
-        results = [p for p in player.character.inventory if p.matches(item_name)]
-        if len(results) > 0:
-            return results[0]
+        return next((p for p in player.character.inventory if p.matches(item_name)), None)
