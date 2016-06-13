@@ -1,6 +1,7 @@
 from erukar.engine.factories.FactoryBase import FactoryBase
 from erukar.engine.environment import *
 from erukar.engine.model import Direction
+from erukar.engine.model.CoordinateTranslator import CoordinateTranslator
 import numpy as np
 import math, random
 
@@ -43,14 +44,14 @@ class DungeonGenerator(FactoryBase):
         '''Fill in the abyss with walls (ugly, need to optimize)'''
         for room in self.dungeon.rooms:
             for direction in self.possible_directions(room):
-                room.connections[direction] = { 'door': Wall() }
+                room.connections[direction] = { 'door': Wall(), 'room': None }
 
     def connect_randomly(self, origin):
         '''Connect a room (origin) to a destination room in some random direction'''
         if not any(self.possible_directions(origin)): return
 
         direction = self.random_direction(origin)
-        new_coords = self.to_coordinate(origin.coordinates, direction)
+        new_coords = CoordinateTranslator.translate(origin.coordinates, direction)
         if new_coords in self.dungeon.dungeon_map:
             destination = self.dungeon.dungeon_map[new_coords]
         else:
@@ -74,7 +75,8 @@ class DungeonGenerator(FactoryBase):
 
     def possible_directions(self, room):
         '''Get all directions for a room that are not already specified'''
-        return [d for d in room.connections if room.connections[d] is None]
+        return [d for d in room.connections \
+            if room.connections[d]['door'] is None and room.connections[d]['room'] is None]
 
     def random_direction(self, room):
         '''Find a random direction implementing biases'''
@@ -98,16 +100,3 @@ class DungeonGenerator(FactoryBase):
         '''
         rand = random.random()
         return sum(1 for pct in self.branching_probabilities if rand > pct)
-
-    def to_coordinate(self, origin_coord, direction):
-        '''Hmm, how do I clean this up?'''
-        if direction is Direction.North:
-            return (origin_coord[0], origin_coord[1]+1)
-        if direction is Direction.East:
-            return (origin_coord[0]+1, origin_coord[1])
-        if direction is Direction.South:
-            return (origin_coord[0], origin_coord[1]-1)
-        if direction is Direction.West:
-            return (origin_coord[0]-1, origin_coord[1])
-        # Otherwise, just return the origin point... used when first generating
-        return (0, 0)

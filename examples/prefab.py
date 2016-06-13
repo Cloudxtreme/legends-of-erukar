@@ -2,6 +2,7 @@ from erukar import *
 from examples.helpers.ExampleRunner import ExampleRunner
 
 runner = ExampleRunner()
+dungeon_generator = DungeonGenerator()
 
 # North Room
 n = Room((0,0))
@@ -36,6 +37,10 @@ s.add(article='a', item=l, preposition='on the floor')
 d = Door()
 c.coestablish_connection(Direction.North, n, None)
 c.coestablish_connection(Direction.South, s, d)
+
+dungeon_generator.dungeon = Dungeon()
+dungeon_generator.dungeon.rooms = [n, c, s]
+dungeon_generator.fill_walls()
 runner.set_room(n)
 
 runner.start()

@@ -7,7 +7,7 @@ class Room(Containable):
     def __init__(self, coordinates=(0,0)):
         super().__init__()
         self.coordinates = coordinates
-        self.connections = {direction: None for direction in Direction}
+        self.connections = {direction: { "room": None, "door": None} for direction in Direction}
 
     def connect_room(self, direction, other_room, door=None):
         if other_room is not self:
