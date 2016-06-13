@@ -18,7 +18,7 @@ class OpenTests(unittest.TestCase):
 
         result = o.execute('north')
 
-        self.assertEqual(result, Open.nesw_wall)
+        self.assertEqual(result, Open.nesw_no_door)
 
     def test_execute_through_no_door(self):
         p = Player()
