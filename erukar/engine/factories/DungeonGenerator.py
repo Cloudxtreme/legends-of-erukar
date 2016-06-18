@@ -7,18 +7,19 @@ import math, random
 
 class DungeonGenerator(FactoryBase):
     def __init__(self):
-        # The Hallway Bias is the bias of the dungeon to continue forward instead of cornering
-        self.hallway_bias = 0.6
         '''
         The following probabilities determine the likelihood of the number of
         branches, e.g. here we have a 70% chance of 1 new connection, 20% chance
         of 2 new connections, and a 10% chance of a 4-way room
         '''
-        self.branching_probabilities = [0.0, 0.70, 0.90]
+        self.branching_probabilities = [0.0, 0.50, 0.90]
+        # The Hallway Bias is the bias of the dungeon to continue forward instead of cornering
+        self.hallway_bias = 0.3
+        self.avg_rooms = 15
 
     def generate(self):
         self.dungeon = Dungeon()
-        num_rooms = math.floor(np.random.gamma(15, 1.0)) + Dungeon.minimum_rooms
+        num_rooms = math.floor(np.random.gamma(self.avg_rooms, 1.0)) + Dungeon.minimum_rooms
         self.create_rooms(num_rooms)
 
         return self.dungeon
