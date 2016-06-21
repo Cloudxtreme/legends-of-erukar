@@ -8,12 +8,13 @@ import math, random
 class DungeonGenerator(FactoryBase):
     def __init__(self):
         '''
-        The following probabilities determine the likelihood of the number of
+        The branching probabilities determine the likelihood of the number of
         branches, e.g. here we have a 70% chance of 1 new connection, 20% chance
         of 2 new connections, and a 10% chance of a 4-way room
+
+        The Hallway Bias is the bias of the dungeon to continue forward instead of cornering
         '''
         self.branching_probabilities = [0.0, 0.50, 0.90]
-        # The Hallway Bias is the bias of the dungeon to continue forward instead of cornering
         self.hallway_bias = 0.3
         self.avg_rooms = 15
 
@@ -57,8 +58,13 @@ class DungeonGenerator(FactoryBase):
         '''Connect a room (origin) to a destination room in some random direction'''
         if not any(self.possible_directions(origin)): return
 
+        # Ensures that we don't try to default to (0,0)
+        while len(self.dungeon.dungeon_map) > 1 and origin.coordinates == (0,0) and (origin.coordinates) in self.dungeon.dungeon_map:
+            origin = random.choice([self.dungeon.dungeon_map[d] for d in self.dungeon.dungeon_map])
+
         direction = self.random_direction(origin)
         new_coords = CoordinateTranslator.translate(origin.coordinates, direction)
+
         if new_coords in self.dungeon.dungeon_map:
             destination = self.dungeon.dungeon_map[new_coords]
         else:
