@@ -17,4 +17,4 @@ class ProbablisticGenerator(FactoryBase):
         self.values = np.array(possibilities)
 
     def create_one(self):
-        return self.values[np.digitize(random.uniform(0, 1), self.bins)]
+        return self.values[np.digitize(random.uniform(0, 1), self.bins)]()
