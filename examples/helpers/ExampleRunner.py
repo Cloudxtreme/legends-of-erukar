@@ -19,8 +19,8 @@ class ExampleRunner:
     def start(self):
         print(self.interface.execute(self.character.uid, 'inspect'))
         while True:
-            line = input('> ')
-            print('')
+            line = input('\n> ')
+            print('-' * 64 + '\n')
             res = self.interface.execute(self.character.uid, line)
             if res is not None:
                 print(res)

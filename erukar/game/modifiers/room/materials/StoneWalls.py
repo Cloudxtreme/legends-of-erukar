@@ -4,4 +4,4 @@ from erukar.game.modifiers.RoomModifier import RoomModifier
 
 class StoneWalls(RoomModifier):
     def apply_to(self, room):
-        room.description += ' The walls are made of stone.'
+        room.description += 'The walls are made of stone. '

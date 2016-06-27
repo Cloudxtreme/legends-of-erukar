@@ -4,4 +4,4 @@ from erukar.game.modifiers.RoomModifier import RoomModifier
 
 class Dusty(RoomModifier):
     def apply_to(self, room):
-        room.description += ' The air is dusty.'
+        room.description += 'The air is dusty. '

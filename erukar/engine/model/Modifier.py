@@ -32,7 +32,7 @@ class Modifier:
         if self.permission_type is Modifier.ALL_PERMITTED:
             return self.is_in_group(entity, self.permitted_entities)
 
-        return not (self.permission_type is Modifier.NONE)
+        return self.permission_type is Modifier.ALL
 
     def is_in_group(self, entity, group):
         return any(r for r in group if r == type(entity) or issubclass(type(entity), r))

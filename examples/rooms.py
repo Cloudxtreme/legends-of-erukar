@@ -1,7 +1,7 @@
 from erukar import *
 from examples.helpers.ExampleRunner import ExampleRunner
 
-print('Room Generation Example: Basically just a randomly generated hallway right now')
+print('Room Generation Example: Basically just a randomly generated hallway right now\n')
 
 runner = ExampleRunner()
 d = DungeonGenerator()

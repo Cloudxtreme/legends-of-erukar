@@ -30,7 +30,7 @@ class DungeonGenerator(FactoryBase):
         self.dungeon.rooms = [Room() for x in range(num_rooms)]
         self.dungeon.dungeon_map[(0,0)] = self.dungeon.rooms[0]
         self.connect_rooms()
-        self.generate_descriptions()
+        #self.generate_descriptions()
         self.fill_walls()
 
     def connect_rooms(self):
