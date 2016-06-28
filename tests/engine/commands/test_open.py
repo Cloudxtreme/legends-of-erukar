@@ -115,8 +115,8 @@ class OpenTests(unittest.TestCase):
 
         n = Room()
         p.current_room = n
-        chest = Container(aliases=['chest'], inspect_results='')
-        n.add(article='a', item=chest, preposition='on')
+        chest = Container(aliases=['chest'], inspect_results='', broad_results='')
+        n.add(chest)
 
         o = Open()
         o.sender_uid = p.uid

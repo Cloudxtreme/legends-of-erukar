@@ -5,7 +5,9 @@ from erukar.engine.environment import Door, Wall
 
 class Room(Containable):
     def __init__(self, coordinates=(0,0)):
-        super().__init__()
+        super().__init__([],"","")
+        self.floor = None
+        self.ceiling = None
         self.coordinates = coordinates
         self.connections = {direction: { "room": None, "door": None} for direction in Direction}
 

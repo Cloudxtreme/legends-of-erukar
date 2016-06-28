@@ -1,4 +1,4 @@
-from erukar.engine.environment.EnvironmentPiece import EnvironmentPiece
+from erukar.engine.model.EnvironmentPiece import EnvironmentPiece
 
 class Decoration(EnvironmentPiece):
     pass

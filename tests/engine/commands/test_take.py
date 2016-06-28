@@ -6,15 +6,24 @@ class TakeTests(unittest.TestCase):
         p = Player()
         p.uid = 'Bob'
 
+        pn = PlayerNode(p.uid, p)
         data_store = DataAccess()
-        data_store.players.append(PlayerNode(p.uid, p))
+        data_store.players.append(pn)
 
         w = Weapon()
         w.item_type = 'Sword'
         r = Room()
-        p.current_room = r
-        r.add(article='a', item=w, preposition='on the floor')
+        r.add(w)
+        p.link_to_room(r)
+        pn.move_to_room(r)
 
+        # Inspect the room to index the item
+        i = Inspect()
+        i.sender_uid = p.uid
+        i.data = data_store
+        i.execute('')
+
+        # Now take it
         t = Take()
         t.sender_uid = p.uid
         t.data = data_store

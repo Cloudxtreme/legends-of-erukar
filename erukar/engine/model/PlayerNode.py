@@ -9,8 +9,6 @@ class PlayerNode:
 
     def index_item(self, item, container):
         '''Used to store to traverse paths through a container tree to find an object'''
-        if type(item) is EntityLocation:
-            item = item.entity
         if container not in self.item_indexer:
             self.item_indexer[container] = []
         self.item_indexer[item] = self.item_indexer[container] + [container]

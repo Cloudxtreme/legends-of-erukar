@@ -42,4 +42,4 @@ class Attack(Command):
         '''Replaces a lifeform with a corpse'''
         room = target.current_room
         room.remove(target)
-        room.add(Corpse(),'a','on the floor')
+        room.add(Corpse())

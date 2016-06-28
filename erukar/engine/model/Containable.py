@@ -1,17 +1,18 @@
 from erukar.engine.model.RpgEntity import RpgEntity
-from erukar.engine.model.EntityLocation import EntityLocation
+from erukar.engine.model.EnvironmentPiece import EnvironmentPiece
 
-class Containable(RpgEntity):
-    def __init__(self):
+class Containable(EnvironmentPiece):
+    def __init__(self, aliases, broad_results, inspect_results):
+        super().__init__(aliases, broad_results, inspect_results)
         self.contents = []
         self.description = ""
 
-    def add(self, article, item, preposition, plural=False):
-        self.contents.append(EntityLocation(item, article, preposition, plural))
+    def add(self, item):
+        self.contents.append(item)
 
     def describe(self):
-        return ' '.join([self.description] + [c.describe() for c in self.contents if c.describe() is not None])
+        return ' '.join([super().describe()] + [c.describe() for c in self.contents if c.describe() is not None])
 
     def remove(self, entity):
-        target = next((x for x in self.contents if x is entity or (hasattr(x, 'entity') and x.entity is entity)), None)
+        target = next((x for x in self.contents if x == entity), None)
         self.contents.remove(target)

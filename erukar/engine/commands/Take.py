@@ -21,9 +21,6 @@ class Take(Command):
         return Take.failure.format(item_name)
 
     def move_to_inventory(self, item, player, room):
-        if type(item) is EntityLocation:
-            item = item.entity
-
         if not issubclass(type(item), Item):
             return Take.cannot_take.format(item.get_name().capitalize())
 

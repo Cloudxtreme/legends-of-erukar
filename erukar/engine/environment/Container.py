@@ -1,9 +1,8 @@
 from erukar.engine.model.Containable import Containable
-from erukar.engine.environment.EnvironmentPiece import EnvironmentPiece
 
-class Container(Containable, EnvironmentPiece):
-    def __init__(self, aliases, inspect_results):
-        Containable.__init__(self)
+class Container(Containable):
+    def __init__(self, aliases, broad_results, inspect_results):
+        super().__init__(aliases, broad_results, inspect_results)
         self.aliases = aliases
         self.description = inspect_results
 

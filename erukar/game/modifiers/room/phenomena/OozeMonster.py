@@ -8,5 +8,5 @@ class OozeMonster(RoomModifier):
     def apply_to(self, room):
         l = Lifeform('Gray Ooze')
         l.define_level(1)
-        room.add(article='a', item=l, preposition='on the floor')
+        room.add(l)
         l.link_to_room(room)
