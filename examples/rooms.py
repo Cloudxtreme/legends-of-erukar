@@ -8,9 +8,11 @@ d = DungeonGenerator()
 dungeon = d.generate()
 
 # Now Decorate the dungeon
-decorator = RoomDecorator()
+materials = RoomDecorator('erukar.game.modifiers.room.materials')
+qualities = RoomDecorator('erukar.game.modifiers.room.qualities')
 for room in dungeon.rooms:
-    decorator.create_one().apply_to(room)
+    materials.create_one().apply_to(room)
+    qualities.create_one().apply_to(room)
 
 runner.set_room(dungeon.rooms[0])
 runner.start()

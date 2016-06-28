@@ -1,16 +1,13 @@
 from erukar.engine import ProbablisticGenerator
 from erukar.game.modifiers.room import *
+import sys, inspect
 
 class RoomDecorator(ProbablisticGenerator):
-    possibilities = [
-        (2, Dusty),
-        (2, Small),
-        (1, StillAir),
-        (1, WaterDrops),
-        (2, StoneWalls),
-        (2, WoodFloor)]
-
-    def __init__(self):
+    def __init__(self, module):
         super().__init__()
-        weights, values = zip(*RoomDecorator.possibilities)
+
+        decoration_module = sys.modules[module]
+        poss = [x[1] for x in inspect.getmembers(decoration_module, inspect.isclass)]
+
+        weights, values = zip(*[(p.Probability, p) for p in poss])
         self.create_distribution(values, weights)
