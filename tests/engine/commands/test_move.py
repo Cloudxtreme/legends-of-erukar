@@ -20,7 +20,7 @@ class MoveTests(unittest.TestCase):
         m.sender_uid = c.uid
         result = m.change_room(p, new_room, Direction.South)
 
-        self.assertEqual(result, Move.move_successful.format('South', 'new_room'))
+        self.assertEqual(result, Move.move_successful.format('South', 'new_room') +' \n')
         self.assertTrue(c in new_room.contents)
         self.assertTrue(c not in old_room.contents)
 

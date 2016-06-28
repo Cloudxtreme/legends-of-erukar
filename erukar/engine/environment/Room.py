@@ -48,4 +48,4 @@ class Room(Containable):
     def describe(self):
         dirs = [self.describe_in_direction(d, draw_walls=True) for d in self.connections]
         contents = [c.describe() for c in self.contents if c.describe() is not None]
-        return ' '.join([self.description] + contents + ['\n'+d for d in dirs if d is not None])
+        return ' '.join([self.description] + contents + ['\n'] + ['\n'+d for d in dirs if d is not None])
