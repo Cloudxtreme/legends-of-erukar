@@ -8,11 +8,20 @@ d = DungeonGenerator()
 dungeon = d.generate()
 
 # Now Decorate the dungeon
-materials = RoomDecorator('erukar.game.modifiers.room.materials')
-qualities = RoomDecorator('erukar.game.modifiers.room.qualities')
+base_module = "erukar.game.modifiers.room.{0}"
+sub_modules = [
+    "materials.floors",
+    "materials.walls",
+    "materials.ceilings",
+    "structure",
+    "qualities.air",
+    "qualities.sounds"]
+
+decorators = [RoomDecorator(base_module.format(sm)) for sm in sub_modules]
+
 for room in dungeon.rooms:
-    materials.create_one().apply_to(room)
-    qualities.create_one().apply_to(room)
+    for decorator in decorators:
+        decorator.create_one().apply_to(room)
 
 runner.set_room(dungeon.rooms[0])
 runner.start()

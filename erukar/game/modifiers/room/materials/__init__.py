@@ -1,4 +1,3 @@
-from .StoneWalls import StoneWalls
-from .WoodFloor import WoodFloor
-
-__all__ = ["StoneWalls", "WoodFloor"]
+from .floors import *
+from .walls import *
+from .ceilings import *
