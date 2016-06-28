@@ -28,7 +28,7 @@ class Room(Containable):
         return self.description
 
     def inspect_peek(self, direction):
-        return 'To your {0} you see a room.'.format(direction)
+        return self.description
 
     def describe_in_direction(self, direction, draw_walls=False):
         con = self.connections[direction]
@@ -37,13 +37,19 @@ class Room(Containable):
             if con['door'] is not None:
                 if type(con['door']) is Wall and draw_walls:
                     return con['door'].on_inspect(direction.name)
-                if type(con['door']) is Door and con['door'].status != Door.Open:
-                    return con['door'].on_inspect(direction.name)
+                if type(con['door']) is Door:
+                    return self.describe_door_in_direction(con['door'], con['room'], direction.name)
 
             if 'room' in con and con['room'] is not None:
                 return con['room'].inspect_peek(direction.name)
 
         return None
+
+    def describe_door_in_direction(self, door, room, direction):
+        door_result = door.on_inspect(direction)
+        if door.status == Door.Open:
+            door_result += ' ' + room.inspect_peek(direction)
+        return door_result
 
     def describe(self):
         dirs = [self.describe_in_direction(d, draw_walls=True) for d in self.connections]

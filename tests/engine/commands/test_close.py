@@ -60,7 +60,7 @@ class CloseTests(unittest.TestCase):
 
         result = o.execute('south')
 
-        self.assertEqual(result, Close.nesw_already_closed)
+        self.assertEqual(result, Door.already_closed)
 
     def test_execute_through_closed_door(self):
         p = Player()
@@ -80,7 +80,7 @@ class CloseTests(unittest.TestCase):
         o.data = data_store
 
         result = o.execute('south')
-        self.assertEqual(result, Close.nesw_already_closed)
+        self.assertEqual(result, Door.already_closed)
 
 
     def test_execute_through_open_door(self):
@@ -103,7 +103,7 @@ class CloseTests(unittest.TestCase):
 
         result = o.execute('south')
 
-        self.assertEqual(result, Close.nesw_close_success)
+        self.assertEqual(result, Door.close_success)
         self.assertEqual(d.status, Door.Closed)
 
     def test_execute_on_chest(self):

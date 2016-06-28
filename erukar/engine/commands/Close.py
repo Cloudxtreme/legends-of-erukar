@@ -2,8 +2,6 @@ from erukar.engine.commands.DirectionalCommand import DirectionalCommand
 from erukar.engine.environment.Door import Door
 
 class Close(DirectionalCommand):
-    nesw_close_success = 'You have successfully closed the door'
-    nesw_already_closed = 'The door is already closed'
     nesw_no_door = 'There is no door in this direction to close'
     nesw_wall = 'You cannot close a wall'
     not_found = 'There is nothing to close'
@@ -16,7 +14,7 @@ class Close(DirectionalCommand):
 
         # If the payload was NESW, treat this as a door
         if direction is not None:
-            return self.handle_doors(room, direction)
+            return self.handle_doors(room, direction, player)
 
         # Otherwise we need to find in the room
         return self.handle_contents(room, player, payload)
@@ -31,7 +29,7 @@ class Close(DirectionalCommand):
         # Send a failure message
         return Close.not_found
 
-    def handle_doors(self, room, direction):
+    def handle_doors(self, room, direction, player):
         '''
         Treat this command as an close doors command, since the user typed in
         a direction
@@ -48,10 +46,5 @@ class Close(DirectionalCommand):
             # There is no door to close
             return Close.nesw_no_door
 
-        # Door is already close
-        if door.status is not Door.Open:
-            return Close.nesw_already_closed
-
-        # Actually close the door
-        door.status = Door.Closed
-        return Close.nesw_close_success
+        # Have the door handle it now
+        return door.on_close(player)
