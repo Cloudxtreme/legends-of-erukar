@@ -11,3 +11,8 @@ class RoomDecorator(ProbablisticGenerator):
 
         weights, values = zip(*[(p.Probability, p) for p in poss])
         self.create_distribution(values, weights)
+
+
+    def apply_one_to(self, room):
+        '''shortcut to make one and apply it'''
+        self.create_one().apply_to(room)

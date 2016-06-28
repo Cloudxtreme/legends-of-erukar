@@ -14,14 +14,16 @@ sub_modules = [
     "materials.walls",
     "materials.ceilings",
     "structure",
+    "phenomena",
     "qualities.air",
+    "qualities.lighting",
     "qualities.sounds"]
 
 decorators = [RoomDecorator(base_module.format(sm)) for sm in sub_modules]
 
 for room in dungeon.rooms:
     for decorator in decorators:
-        decorator.create_one().apply_to(room)
+        decorator.apply_one_to(room)
 
 runner.set_room(dungeon.rooms[0])
 runner.start()
