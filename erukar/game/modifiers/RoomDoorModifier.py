@@ -11,7 +11,7 @@ class RoomDoorModifier(RoomModifier):
         self.start_state = Door.Open
 
     def apply_to(self, room):
-        rooms = [r for r in room.connections if room.connections[r]['room'] is not None and room.connections[r]['door'] is None]
+        rooms = [r for r in room.connections if room.connections[r].room is not None and room.connections[r].door is None]
         if len(rooms) == 0: return
 
         direction = random.choice(rooms)

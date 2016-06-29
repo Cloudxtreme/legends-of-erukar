@@ -77,11 +77,11 @@ class Map(Command):
     def passage_to_icon(self, connection, direction):
         '''Converts a passage type to its appropriate icon'''
         if connection['door'] is not None:
-            if isinstance(connection['door'], Door) and connection['door'].can_close:
+            if isinstance(connection.door, Door) and connection.door.can_close:
                 if direction is Direction.North or direction is Direction.South:
-                    return Map.horiz_door_open if connection['door'].status is Door.Open else Map.horiz_door_closed
-                return Map.vert_door_open if connection['door'].status is Door.Open else Map.vert_door_closed
+                    return Map.horiz_door_open if connection.door.status is Door.Open else Map.horiz_door_closed
+                return Map.vert_door_open if connection.door.status is Door.Open else Map.vert_door_closed
 
-        if connection['room'] is not None:
+        if connection.room is not None:
             return Map.empty_space
         return Map.solid_wall

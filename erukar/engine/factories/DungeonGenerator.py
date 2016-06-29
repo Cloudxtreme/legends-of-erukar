@@ -52,7 +52,7 @@ class DungeonGenerator(FactoryBase):
         '''Fill in the abyss with walls (ugly, need to optimize)'''
         for room in self.dungeon.rooms:
             for direction in self.possible_directions(room):
-                room.connections[direction] = { 'door': Wall(), 'room': None }
+                room.connections[direction] = Passage(door=Wall())
 
     def connect_randomly(self, origin):
         '''Connect a room (origin) to a destination room in some random direction'''
@@ -89,7 +89,7 @@ class DungeonGenerator(FactoryBase):
     def possible_directions(self, room):
         '''Get all directions for a room that are not already specified'''
         return [d for d in room.connections \
-            if room.connections[d]['door'] is None and room.connections[d]['room'] is None]
+            if room.connections[d].door is None and room.connections[d].room is None]
 
     def random_direction(self, room):
         '''Find a random direction implementing biases'''

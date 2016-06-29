@@ -36,10 +36,10 @@ class RoomTests(unittest.TestCase):
         n_result = n.get_in_direction(Direction.South)
         s_result = s.get_in_direction(Direction.North)
 
-        self.assertEqual(n_result['room'], s)
-        self.assertEqual(s_result['room'], n)
-        self.assertIsNone(n_result['door'])
-        self.assertIsNone(s_result['door'])
+        self.assertEqual(n_result.room, s)
+        self.assertEqual(s_result.room, n)
+        self.assertIsNone(n_result.door)
+        self.assertIsNone(s_result.door)
 
     def test_coestablish_connection(self):
         n = Room()
@@ -50,7 +50,7 @@ class RoomTests(unittest.TestCase):
         n_result = n.get_in_direction(Direction.South)
         s_result = s.get_in_direction(Direction.North)
 
-        self.assertEqual(n_result['room'], s)
-        self.assertEqual(s_result['room'], n)
-        self.assertIsNone(n_result['door'])
-        self.assertIsNone(s_result['door'])
+        self.assertEqual(n_result.room, s)
+        self.assertEqual(s_result.room, n)
+        self.assertIsNone(n_result.door)
+        self.assertIsNone(s_result.door)

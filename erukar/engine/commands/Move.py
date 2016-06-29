@@ -14,7 +14,7 @@ class Move(DirectionalCommand):
         in_direction = player.character.current_room.get_in_direction(direction)
 
         # determine if the door prevents movement
-        door = in_direction['door']
+        door = in_direction.door
         if door is not None:
             if type(door) is Door and door.status is not Door.Open:
                 return Move.move_through_closed_door
@@ -22,9 +22,9 @@ class Move(DirectionalCommand):
                 return Move.move_through_wall
 
         # Move and autoinspect the room for the player
-        if in_direction['room'] is None:
+        if in_direction.room is None:
             return Move.move_through_wall
-        return self.change_room(player, in_direction['room'], direction)
+        return self.change_room(player, in_direction.room, direction)
 
     def change_room(self, player, new_room, direction):
         '''Used to transfer the character from one room to the next'''
