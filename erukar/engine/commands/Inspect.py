@@ -16,7 +16,7 @@ class Inspect(DirectionalCommand):
         if direction is None:
             return self.inspect_in_room(player, room, payload)
 
-        result = room.describe_in_direction(direction)
+        result = room.describe_in_direction(direction, inspect_walls=True)
         if result is not None:
             return result
 

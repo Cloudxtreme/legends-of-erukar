@@ -1,6 +1,7 @@
 from erukar.engine.model.Containable import Containable
 from erukar.engine.model.Direction import Direction
-from erukar.engine.environment import Surface, Passage
+from erukar.engine.environment.Passage import Passage
+from erukar.engine.environment.Surface import Surface
 
 class Room(Containable):
     def __init__(self, coordinates=(0,0)):
@@ -56,7 +57,7 @@ class Room(Containable):
     def generate_direction_descriptions(self):
         '''Generator for creating a list of directional descriptions'''
         for direction in self.connections:
-            res = self.describe_in_direction(direction, inspect_walls=True)
+            res = self.describe_in_direction(direction, inspect_walls=False)
             if res is not None:
                 yield '\n{0}:\t{1}'.format(direction.name, res)
 
@@ -66,3 +67,10 @@ class Room(Containable):
             description = content.describe()
             if description is not None:
                 yield description
+
+    def walls(self):
+        '''Generator for getting only the walls in this room'''
+        for direction in self.connections:
+            passage = self.connections[direction]
+            if passage.room is None and isinstance(passage.door, Surface):
+                yield passage.door
