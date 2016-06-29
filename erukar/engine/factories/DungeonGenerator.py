@@ -52,7 +52,7 @@ class DungeonGenerator(FactoryBase):
         '''Fill in the abyss with walls (ugly, need to optimize)'''
         for room in self.dungeon.rooms:
             for direction in self.possible_directions(room):
-                room.connections[direction] = Passage(door=Wall())
+                room.connections[direction] = Passage(door=Surface())
 
     def connect_randomly(self, origin):
         '''Connect a room (origin) to a destination room in some random direction'''

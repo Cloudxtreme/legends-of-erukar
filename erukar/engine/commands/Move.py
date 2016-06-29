@@ -18,7 +18,7 @@ class Move(DirectionalCommand):
         if door is not None:
             if type(door) is Door and door.status is not Door.Open:
                 return Move.move_through_closed_door
-            if type(door) is Wall:
+            if type(door) is Surface:
                 return Move.move_through_wall
 
         # Move and autoinspect the room for the player

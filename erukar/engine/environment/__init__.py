@@ -7,7 +7,7 @@ from .Door import Door
 from .Passage import Passage
 from .Room import Room
 from .Trap import Trap
-from .Wall import Wall
+from .Surface import Surface
 
 __all__ = [
     "Container",
@@ -19,4 +19,4 @@ __all__ = [
     "Passage",
     "Room",
     "Trap",
-    "Wall"]
+    "Surface"]

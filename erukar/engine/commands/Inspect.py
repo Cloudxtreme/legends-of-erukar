@@ -22,11 +22,16 @@ class Inspect(DirectionalCommand):
 
         return Inspect.abyss.format(direction.name)
 
-
     def inspect_in_room(self, player, room, payload):
         '''Used if the player didn't specify a direction'''
         if payload in ['','room']:
             return room.describe()
+
+        if payload in 'flooring':
+            return room.floor.on_inspect()
+
+        if payload in 'ceiling':
+            return room.ceiling.on_inspect()
 
         item = self.find_in_room(room, payload)
         if item is not None:
