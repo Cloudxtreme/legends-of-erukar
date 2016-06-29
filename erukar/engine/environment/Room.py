@@ -1,6 +1,5 @@
 from erukar.engine.model.Containable import Containable
 from erukar.engine.model.Direction import Direction
-from erukar.engine.model.EntityLocation import EntityLocation
 from erukar.engine.environment import Door, Wall
 
 class Room(Containable):

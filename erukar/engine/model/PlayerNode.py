@@ -1,5 +1,3 @@
-from erukar.engine.model.EntityLocation import EntityLocation
-
 class PlayerNode:
     def __init__(self, uid, character):
         self.uid = uid

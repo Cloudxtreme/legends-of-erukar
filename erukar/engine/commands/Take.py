@@ -1,6 +1,5 @@
 from erukar.engine.model.Command import Command
 from erukar.engine.inventory.Item import Item
-from erukar.engine.model.EntityLocation import EntityLocation
 
 class Take(Command):
     failure = "No item '{0}' was found"

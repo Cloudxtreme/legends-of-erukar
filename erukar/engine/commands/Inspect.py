@@ -1,6 +1,5 @@
 from erukar.engine.commands.DirectionalCommand import DirectionalCommand
 from erukar.engine.model.Containable import Containable
-from erukar.engine.model.EntityLocation import EntityLocation
 
 class Inspect(DirectionalCommand):
     not_found = "Nothing matching '{0}' was found in this room."
@@ -37,8 +36,6 @@ class Inspect(DirectionalCommand):
 
     def inspect_item(self, item, player):
         '''Inspect an item and index it if it's a container'''
-        if type(item) is EntityLocation:
-            item = item.entity
         self.index(item, player)
         return item.on_inspect(player)
 

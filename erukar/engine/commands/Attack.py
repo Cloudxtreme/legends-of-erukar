@@ -1,5 +1,4 @@
 from erukar.engine.model.Command import Command
-from erukar.engine.model.EntityLocation import EntityLocation
 from erukar.engine.environment.Corpse import Corpse
 
 class Attack(Command):
@@ -15,8 +14,6 @@ class Attack(Command):
 
         if target is None:
             return Attack.not_found.format(target_description)
-        if type(target) is EntityLocation:
-            target = target.entity
         return self.adjudicate_attack(player.character, target)
 
     def adjudicate_attack(self, character, target):
