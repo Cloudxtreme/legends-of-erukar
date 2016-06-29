@@ -30,7 +30,7 @@ class DungeonGeneratorTests(unittest.TestCase):
         self.gen.fill_walls()
         r = self.gen.dungeon.rooms[0]
 
-        walls = len([self.gen.dungeon.rooms[0].connections[d]['door'] \
+        walls = len([self.gen.dungeon.rooms[0].connections[d].door \
             for d in self.gen.dungeon.rooms[0].connections if self.gen.dungeon.rooms[0].connections[d] is not None])
         self.assertEqual(walls, 4)
 

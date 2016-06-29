@@ -41,7 +41,7 @@ class Close(DirectionalCommand):
             return Close.nesw_wall
 
         # determine if the door prevents movement
-        door = in_direction["door"]
+        door = in_direction.door
         if door is None:
             # There is no door to close
             return Close.nesw_no_door
