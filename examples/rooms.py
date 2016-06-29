@@ -14,6 +14,8 @@ sub_modules = [
     "materials.walls",
     "materials.ceilings",
     "structure.ceilings",
+    "contents.decorations",
+    "contents.items",
     "structure.passages",
     "phenomena",
     "qualities.air",

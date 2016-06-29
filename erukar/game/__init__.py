@@ -1,2 +1,3 @@
-from erukar.game.modifiers import *
-from erukar.game.decorators import *
+from .modifiers import *
+from .decorators import *
+from .inventory import *

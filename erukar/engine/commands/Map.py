@@ -39,6 +39,7 @@ class Map(Command):
         '''Draw a MASSIVE map where each room is a 3x3; draws doors, too'''
         max_x, max_y = map(max, zip(*player.dungeon_map))
         min_x, min_y = map(min, zip(*player.dungeon_map))
+        drawn_doors = set()
 
         # First pass: Find the rooms and make the blocks around them
         dnjn_map = [[self.complex_map_location(x, y, player.dungeon_map)
@@ -46,7 +47,7 @@ class Map(Command):
 
         # Second pass: Add the doors where appropriate
         for r in player.dungeon_map:
-            self.complex_add_doors(dnjn_map, player.dungeon_map[r], min_x, min_y)
+            self.complex_add_doors(dnjn_map, player.dungeon_map[r], min_x, min_y, drawn_doors)
 
         # show the player as an X
         self.complex_add_player(room.coordinates, dnjn_map, min_x, min_y)
@@ -65,18 +66,19 @@ class Map(Command):
         x, y = ((player_coordinates[0]-min_x)*3+1, (player_coordinates[1]-min_y)*3+1)
         dungeon_map[y][x] = Map.player_marker
 
-    def complex_add_doors(self, dungeon_map, room, min_x, min_y):
+    def complex_add_doors(self, dungeon_map, room, min_x, min_y, drawn_doors):
         '''Draws the doors and passageways in a complex map'''
         x, y = room.coordinates
         center_x, center_y = ((x-min_x)*3+1, (y-min_y)*3+1)
 
         for connection in room.connections:
             dy, dx = CoordinateTranslator.translate((center_x, center_y), connection)
-            dungeon_map[dx][dy] = self.passage_to_icon(room.connections[connection], connection)
+            dungeon_map[dx][dy] = self.passage_to_icon(room.connections[connection], connection, drawn_doors)
 
-    def passage_to_icon(self, connection, direction):
+    def passage_to_icon(self, connection, direction, drawn_doors):
         '''Converts a passage type to its appropriate icon'''
-        if connection.door is not None:
+        if connection.door is not None and connection.door not in drawn_doors:
+            drawn_doors.add(connection.door)
             if isinstance(connection.door, Door) and connection.door.can_close:
                 if direction is Direction.North or direction is Direction.South:
                     return Map.horiz_door_open if connection.door.status is Door.Open else Map.horiz_door_closed

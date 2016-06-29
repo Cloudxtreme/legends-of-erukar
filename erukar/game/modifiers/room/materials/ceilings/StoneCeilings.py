@@ -5,4 +5,4 @@ class StoneCeilings(RoomModifier):
     Probability = 3
 
     def apply_to(self, room):
-        room.ceiling = Surface('The ceiling is made of stone.')
+        room.ceiling = Surface('The ceiling is made of stone. ')

@@ -20,7 +20,7 @@ class Equip(Command):
             return Equip.not_found.format(item_name)
 
         # Check to see if the item's type exists as a field on the character
-        item_type = self.item_type(item)
+        item_type = item.item_type
         if hasattr(player.character, item_type):
             setattr(player.character, item_type, item)
             return getattr(Equip, 'equipped_{0}'.format(item_type)).format(item.describe())

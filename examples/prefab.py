@@ -10,8 +10,8 @@ n.description = 'This room is cold and dusty.'
 n_deco = Decoration(aliases=['strange cracks'], \
     broad_results="The floor contains several strain cracks.",\
     inspect_results='These cracks appear to have been left by a blunt weapon of some sort, likely a mace.')
-w = Weapon()
-w.rarity, w.item_type, w.damage = ['Uncommonly Strong', 'Mace', '1d10+2']
+w = Weapon('Mace')
+w.rarity, w.damage = ['Uncommonly Strong', '1d10+2']
 n.add(w)
 n.add(n_deco)
 

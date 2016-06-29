@@ -8,6 +8,7 @@ class Room(Containable):
         super().__init__([],"","")
         self.floor = None
         self.ceiling = None
+        self.luminosity = 1.0 # luminosity will be used in conjunction with visual skill in descriptions
         self.coordinates = coordinates
         self.connections = {direction: Passage() for direction in Direction}
 
@@ -70,7 +71,11 @@ class Room(Containable):
 
     def walls(self):
         '''Generator for getting only the walls in this room'''
+        for direction in self.wall_directions():
+            yield self.connections[direction].door
+
+    def wall_directions(self):
         for direction in self.connections:
             passage = self.connections[direction]
             if passage.room is None and isinstance(passage.door, Surface):
-                yield passage.door
+                yield direction

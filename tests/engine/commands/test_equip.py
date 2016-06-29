@@ -9,8 +9,7 @@ class EquipTests(unittest.TestCase):
         data_store = DataAccess()
         data_store.players.append(PlayerNode(p.uid, p))
 
-        w = Weapon()
-        w.item_type = 'Sword'
+        w = Weapon('Sword')
         p.inventory.append(w)
 
         e = Equip()
@@ -29,14 +28,16 @@ class EquipTests(unittest.TestCase):
         data_store = DataAccess()
         data_store.players.append(PlayerNode(p.uid, p))
 
-        a = Armor()
-        a.item_type = 'Plate Mail'
+        a = Armor('Plate Mail')
+        self.assertEqual(a.item_type, 'armor')
+        self.assertEqual(a.name, 'Plate Mail')
         p.inventory.append(a)
 
         e = Equip()
         e.sender_uid = p.uid
         e.data = data_store
         result = e.execute('plate mail')
+        print(result)
 
         self.assertTrue(a in p.inventory)
         self.assertEqual(p.armor, a)
@@ -49,8 +50,7 @@ class EquipTests(unittest.TestCase):
         data_store = DataAccess()
         data_store.players.append(PlayerNode(p.uid, p))
 
-        i = Item()
-        i.item_type = 'Potion'
+        i = Item('Potion', 'Potion')
         p.inventory.append(i)
 
         e = Equip()
@@ -70,8 +70,7 @@ class EquipTests(unittest.TestCase):
         data_store = DataAccess()
         data_store.players.append(PlayerNode(p.uid, p))
 
-        i = Item()
-        i.item_type = 'Potion'
+        i = Item('Potion','Potion')
         p.inventory.append(i)
 
         e = Equip()

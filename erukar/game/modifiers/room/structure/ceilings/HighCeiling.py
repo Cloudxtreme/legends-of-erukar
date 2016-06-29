@@ -5,4 +5,4 @@ from erukar.game.modifiers.RoomModifier import RoomModifier
 class HighCeiling(RoomModifier):
     Probability = 2
     def apply_to(self, room):
-        room.description += 'The ceiling of the room is higher than normal. '
+        room.ceiling.description += 'The ceiling of the room is higher than normal. '
