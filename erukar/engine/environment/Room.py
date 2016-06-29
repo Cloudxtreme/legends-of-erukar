@@ -1,6 +1,6 @@
 from erukar.engine.model.Containable import Containable
 from erukar.engine.model.Direction import Direction
-from erukar.engine.environment import Door, Wall, Passage
+from erukar.engine.environment import Wall, Passage
 
 class Room(Containable):
     def __init__(self, coordinates=(0,0)):
@@ -36,28 +36,25 @@ class Room(Containable):
         other_dir = self.invert_direction(direction)
         self.connections[direction].room.connections[other_dir].door = door
 
-    def describe_in_direction(self, direction, draw_walls=False):
+    def describe_in_direction(self, direction, inspect_walls=False):
         con = self.connections[direction]
-
-        if con is not None:
-            if con.door is not None:
-                if type(con.door) is Wall and draw_walls:
-                    return con.door.on_inspect(direction.name)
-                if type(con.door) is Door:
-                    return self.describe_door_in_direction(con.door, con.room, direction.name)
-
-            if con.room is not None:
-                return con.room.inspect_peek(direction.name)
-
-        return None
-
-    def describe_door_in_direction(self, door, room, direction):
-        door_result = door.on_inspect(direction)
-        if door.status == Door.Open:
-            door_result += ' ' + room.inspect_peek(direction)
-        return door_result
+        return con.on_inspect(direction, inspect_walls)
 
     def describe(self):
-        dirs = ['{0}:\t{1}'.format(d.name, self.describe_in_direction(d, draw_walls=True)) for d in self.connections if self.connections[d].is_not_empty()]
-        contents = [c.describe() for c in self.contents if c.describe() is not None]
-        return ' '.join([self.description] + contents + ['\n'] + ['\n' + d for d in dirs])
+        directions = list(self.generate_direction_descriptions())
+        contents = list(self.generate_content_descriptions())
+        return ' '.join([self.description] + contents + ['\n'] + directions)
+
+    def generate_direction_descriptions(self):
+        '''Generator for creating a list of directional descriptions'''
+        for direction in self.connections:
+            res = self.describe_in_direction(direction, inspect_walls=True)
+            if res is not None:
+                yield '\n{0}:\t{1}'.format(direction.name, res)
+
+    def generate_content_descriptions(self):
+        '''Generator for creating a list of content descriptions'''
+        for content in self.contents:
+            description = content.describe()
+            if description is not None:
+                yield description

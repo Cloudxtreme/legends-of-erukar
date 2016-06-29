@@ -1,10 +1,8 @@
-from erukar.engine.model import Modifier
-from erukar.engine.environment import *
 from erukar.game.modifiers.RoomDoorModifier import RoomDoorModifier
-import random
+from erukar import Door
 
 class Archway(RoomDoorModifier):
-    Probability = 100
+    Probability = 1
     def __init__(self):
         self.description = "An archway to the {0} opens into another room."
         self.can_close = False
