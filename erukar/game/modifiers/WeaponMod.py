@@ -8,4 +8,4 @@ class WeaponMod(Modifier):
         self.permitted_entities.append(Weapon)
 
     def apply_to(self, weapon):
-        weapon.damage = '1d6+3'
+        pass

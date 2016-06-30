@@ -7,4 +7,7 @@ class Weapon(RoomModifier):
 
     def apply_to(self, room):
         randomizer = RoomDecorator('erukar.game.inventory.weapons')
-        room.add(randomizer.create_one())
+        modifiers = RoomDecorator('erukar.game.modifiers.inventory.weapon')
+        created_weapon = randomizer.create_one()
+        modifiers.create_one().apply_to(created_weapon)
+        room.add(created_weapon)
